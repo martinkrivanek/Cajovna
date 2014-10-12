@@ -1,34 +1,30 @@
 package cz.cvut.fel.fuzesedu;
 
-import junit.framework.Test;
+import cz.cvut.fel.fuzesedu.user.DBUser;
+import org.junit.Test;
+import org.hibernate.exception.ConstraintViolationException;
+
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest extends TestCase {
-	/**
-	 * Create the test case
-	 *
-	 * @param testName
-	 *            name of the test case
-	 */
-	public AppTest(String testName) {
-		super(testName);
-	}
-
-	/**
-	 * @return the suite of tests being tested
-	 */
-	public static Test suite() {
-		return new TestSuite(AppTest.class);
-	}
-
-	/**
-	 * Rigorous Test :-)
-	 */
+	@Test
 	public void testApp() {
 		assertTrue(true);
+	}
+
+	@Test(expected = ConstraintViolationException.class)
+	public void testHappy() {
+		AppBetter appBetter = new AppBetter();
+		appBetter.add();
+	}
+
+	@Test
+	public void testEvil() {
+		AppBetter appBetter = new AppBetter();
+		DBUser user = appBetter.get();
+		assertEquals("Hibernate101", user.getUsername());
 	}
 }
