@@ -1,0 +1,6 @@
+produkty - zobrazení detailù produktu - nedat práva i zákazníkùm?
+dìlit dál finance?
+dìlit dál inventura apod.?
+inventura apod. - možnist vytvoøit objednávku bez jejího odeslání? kam budou postupnì pøipisovat vìci, které potøebují a pak napø. koncem mìsíce objednávku odešlou?
+ - co lze mìnit u odpisu? jen èástka, ne?
+ - export stavu skladu - posím dopsat poznámku, kde bude vysvìtleno proè a co to vlastnì znamená
