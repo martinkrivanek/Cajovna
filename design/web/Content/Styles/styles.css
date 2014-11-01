@@ -1,0 +1,119 @@
+/* RESET */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/* START ------------------------------------------------------ */
+body{
+    width: 1000px;
+    padding: 0 50px;
+    margin: 0 auto;
+    font-family: 'Kozuka Gothic Pr6N';
+    color:  #4a4a4a;
+    font-size: 18px;
+}
+
+/* HEADER ------------------------------*/
+header img#logo {
+    margin: 20px 0 15px 0;
+    clear: both;
+}
+
+header nav {
+    padding: 0;
+    font-size: 18px;
+    margin-bottom: 25px;
+    clear: both;
+}
+
+header nav ul {
+    list-style-type: none;
+    border-bottom: 1px solid #4a4a4a;
+    padding-bottom: 10px;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: 40px;
+}
+
+header a{
+    text-transform: uppercase;
+    text-decoration: none;
+    color:  #4a4a4a;
+}
+
+header a:hover{
+    color:  #0db448;
+}
+
+header #breadcrumbs {
+    margin-bottom: 30px;
+    clear: both;
+    position: relative;
+    font-size: 14px;
+}
+
+header #breadcrumbs img{
+    position: absolute;
+    left: -40px;
+    top: -4px;
+}
+
+header #breadcrumbs a{
+    padding: 0 15px;
+}
+
+header #breadcrumbs a:nth-of-type(2){
+    padding: 0 15px 0 0;
+}
+
+header #breadcrumbs a:first-of-type{
+    padding: 0;
+}
+
+p {
+    margin-bottom: 1em;
+    line-height: 1.35em;
+}
