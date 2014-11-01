@@ -1,0 +1,103 @@
+2014-11-01 12:07:13,445 - [INFO] - from play in pool-41-thread-3 
+Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+2014-11-01 12:07:15,780 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6k40cgokf - Internal server error, for (GET) [/] ->
+
+play.api.Configuration$$anon$1: Configuration error[Driver not found: [com.mysql.jdbc.Driver]]
+	at play.api.Configuration$.play$api$Configuration$$configError(Configuration.scala:94) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Configuration.reportError(Configuration.scala:743) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPApi.register(DB.scala:285) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPApi.createDataSource(DB.scala:300) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPApi.setupDatasources(DB.scala:411) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPApi.<init>(DB.scala:418) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPPlugin.play$api$db$BoneCPPlugin$$dbApi$lzycompute(DB.scala:211) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPPlugin.play$api$db$BoneCPPlugin$$dbApi(DB.scala:211) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPPlugin.onStart(DB.scala:238) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+Caused by: java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:372) ~[na:1.8.0_11]
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:361) ~[na:1.8.0_11]
+	at java.security.AccessController.doPrivileged(Native Method) ~[na:1.8.0_11]
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:360) ~[na:1.8.0_11]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424) ~[na:1.8.0_11]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ~[na:1.8.0_11]
+	at java.lang.Class.forName0(Native Method) ~[na:1.8.0_11]
+	at java.lang.Class.forName(Class.java:340) ~[na:1.8.0_11]
+	at play.api.db.BoneCPApi.register(DB.scala:280) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	... 29 common frames omitted
+
+2014-11-01 12:11:05,541 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6k40cgokf - Internal server error, for (GET) [/] ->
+
+play.api.Configuration$$anon$1: Configuration error[Driver not found: [com.mysql.jdbc.Driver]]
+	at play.api.Configuration$.play$api$Configuration$$configError(Configuration.scala:94) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Configuration.reportError(Configuration.scala:743) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPApi.register(DB.scala:285) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPApi.createDataSource(DB.scala:300) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPApi.setupDatasources(DB.scala:411) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPApi.<init>(DB.scala:418) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPPlugin.play$api$db$BoneCPPlugin$$dbApi$lzycompute(DB.scala:211) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPPlugin.play$api$db$BoneCPPlugin$$dbApi(DB.scala:211) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.db.BoneCPPlugin.onStart(DB.scala:238) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.6.jar:2.3.6]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.6.jar:2.3.6]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+Caused by: java.lang.ClassNotFoundException: com.mysql.jdbc.Driver
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:372) ~[na:1.8.0_11]
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:361) ~[na:1.8.0_11]
+	at java.security.AccessController.doPrivileged(Native Method) ~[na:1.8.0_11]
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:360) ~[na:1.8.0_11]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424) ~[na:1.8.0_11]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ~[na:1.8.0_11]
+	at java.lang.Class.forName0(Native Method) ~[na:1.8.0_11]
+	at java.lang.Class.forName(Class.java:340) ~[na:1.8.0_11]
+	at play.api.db.BoneCPApi.register(DB.scala:280) ~[play-jdbc_2.11-2.3.6.jar:2.3.6]
+	... 29 common frames omitted
+
