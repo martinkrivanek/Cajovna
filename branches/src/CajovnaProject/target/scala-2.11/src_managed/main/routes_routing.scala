@@ -1,6 +1,6 @@
-// @SOURCE:C:/Users/IBM_ADMIN/Documents/Osobni/Skola/usi-cajovna 2/branches/src/CajovnaProject/conf/routes
+// @SOURCE:C:/Users/Pisky/Desktop/usi-cajovna/branches/src/CajovnaProject/conf/routes
 // @HASH:b31e3ed4075748bc0576b3b7654b92b97f9d84ad
-// @DATE:Mon Nov 03 13:46:09 CET 2014
+// @DATE:Mon Nov 03 14:20:06 CET 2014
 
 
 import play.core._

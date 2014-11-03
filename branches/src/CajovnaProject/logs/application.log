@@ -1,3 +1,9 @@
-2014-11-03 13:47:42,898 - [INFO] - from play in pool-19-thread-4 
+2014-11-03 14:20:51,052 - [INFO] - from play in pool-9-thread-4 
 Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+2014-11-03 14:21:13,243 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:mysql://mysql.talfa.cz/cajovna
+
+2014-11-03 14:21:13,452 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
 
