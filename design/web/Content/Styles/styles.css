@@ -46,13 +46,14 @@ table {
 
 /* START ------------------------------------------------------ */
 body{
-    width: 1000px;
-    padding: 0 50px;
+    width: 924px;
+    padding: 0 50px 40px 50px;
     margin: 0 auto;
     font-family: 'Kozuka Gothic Pr6N';
     color:  #4a4a4a;
-    font-size: 18px;
+    font-size: 16px;
 }
+
 
 /* HEADER ------------------------------*/
 header img#logo {
@@ -76,44 +77,170 @@ header nav ul {
 header nav ul li {
     display: inline;
     margin-right: 40px;
+    line-height: 1.35em;
+    vertical-align: top;
 }
 
-header a{
+header a, #breadcrumbs a{
     text-transform: uppercase;
-    text-decoration: none;
     color:  #4a4a4a;
 }
 
-header a:hover{
+header a:hover, #breadcrumbs a:hover{
     color:  #0db448;
+    text-decoration: none;
 }
 
-header #breadcrumbs {
+#breadcrumbs {
     margin-bottom: 30px;
     clear: both;
     position: relative;
     font-size: 14px;
 }
 
-header #breadcrumbs img{
+#breadcrumbs img{
     position: absolute;
     left: -40px;
     top: -4px;
 }
 
-header #breadcrumbs a{
+#breadcrumbs a{
     padding: 0 15px;
 }
 
-header #breadcrumbs a:nth-of-type(2){
+#breadcrumbs a:nth-of-type(2){
     padding: 0 15px 0 0;
 }
 
-header #breadcrumbs a:first-of-type{
+#breadcrumbs a:first-of-type{
     padding: 0;
+}
+
+
+/* TEXT ------------------------------*/
+a {
+    color: #0db448;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 p {
     margin-bottom: 1em;
     line-height: 1.35em;
 }
+
+strong {
+    font-weight: bold;
+}
+
+h2{
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: .7em;
+}
+
+small{
+    font-size: .7em;
+    text-transform: uppercase;
+    margin-left: 1em;
+    font-weight: normal;
+}
+
+h3{
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: .55em;
+}
+
+p.count_0 {
+    margin-left: 1em;
+    font-size: .8em;
+}
+
+ul li{
+   list-style: circle;
+   list-style-position: inside;
+   line-height: 1.35em;
+}
+
+
+/* TABLE ------------------------------*/
+table {
+    vertical-align: middle;
+    font-size: 16px;
+    line-height: 1.3em;
+    margin-bottom: 1.5em;
+}
+
+table p{
+    font-style: italic;
+    font-size: 14px;
+    margin: 0;
+    padding: .4em 0;
+}
+
+table td, table th{
+    padding: .5em 0;    
+    padding-right: 4em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+table td:last-of-type, table th:last-of-type{    
+    padding-right: 0;
+    text-align: right;
+}
+
+table tbody tr:hover{
+    background-color: #e1e1e1;
+}
+
+table thead tr{
+    border-bottom: 1px solid #4a4a4a;
+    font-weight: bold;
+}
+
+table td:first-of-type, table th:first-of-type{
+    text-align: left;
+}
+
+table .name{
+    font-size: 20px;
+}
+
+
+
+table#detail tr td,table#detail tr th{
+    text-align: left;
+    vertical-align: top;
+}
+
+table#detail tr th{
+    font-weight: bold;
+    padding-right: 3em;
+    color: #a1a1a1;
+}
+
+table#detail tr:hover{
+    background-color: white;
+}
+
+
+/* FILTER ------------------------------*/
+
+.filtr {
+    padding-bottom: 1em;
+    margin-left: 20px;
+}
+
+label {
+    line-height: 1.3em;
+    display: inline-block;
+    width: 100px;
+    vertical-align: top;
+    margin-bottom: .2em;
+}
+
