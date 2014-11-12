@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8" />
+    <title>Čajovna</title>
+    <link rel="stylesheet" href="Content/Styles/styles.css" type="text/css" />
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head> 
+<body dir="ltr">
+    <header>
+        <img id="logo" alt="logo" src="Content/Images/cajovna_logo.jpg" height="80" width="490"/>
+        <nav>
+            <ul>
+                <li><a href="asd">Domů</a></li>
+                <li><a href="asd">Nabídka menu</a></li>
+                <li><a href="asd">Stoly</a></li>
+                <li><a href="Admin.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="breadcrumbs">
+        <a href="asdas"><img src="Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš"/></a>
+        <a href="Admin.html">Admin</a>
+        >>
+        <a href="Suroviny.html">Suroviny</a> 
+    </div>
+    <h2>Suroviny</h2>
+    <p><a href="SurovinaAdd.html">+ Vytvořit nový záznam</a></p>
+
+    <form class="filtr">
+        <h3>Filtrování</h3>
+        <label for="sort">Strana</label>
+        <select name="page">
+            <option selected>nezvoleno</option>
+            <option value="1">strana 1</option>
+            <option value="2">strana 2</option>
+        </select>
+        <br/>
+        <label for="sort">Řazení</label>
+        <select name="sort">
+            <option selected>nezvoleno</option>
+            <option value="a-z">A -> Z</option>
+            <option value="z-a">Z -> A</option>
+            <option value="price-9-0">od nejlevnější</option>
+            <option value="price-0-9">od nejdražší</option>
+            <option value="price-9-0">od nejstaršího</option>
+            <option value="price-0-9">od nejnovějšího</option>
+        </select>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Název</th>
+                <th>Cena za jednotku</th>
+                <th>Datum přidání</th>
+                <th><strong>Počet záznamů: 69</strong></th>
+            </tr>
+        </thead>
+        <tbody>           
+            <tr>
+                <td>
+                    <a class="name" href="Surovina.html">Čaj "Pouštní duna"</a>
+                </td>
+                <td>1,5&nbsp;CZK / g</td>
+                <td>12/09/2014</td>
+                <td>
+                    <a href="Surovina.html">Detail</a> | <a href="SurovinaEdit.html">Editace</a> | <a href="SurovinaDelete.html">Smazání</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a class="name" href="Surovina.html">Cukr</a>
+                </td>
+                <td>1,5&nbsp;CZK / g</td>
+                <td>12/09/2014</td>
+                <td>
+                    <a href="Surovina.html">Detail</a> | <a href="SurovinaEdit.html">Editace</a> | <a href="SurovinaDelete.html">Smazání</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a class="name" href="Surovina.html">Pistáciové oříšky</a>
+                </td>
+                <td>20&nbsp;CZK / 100g</td>
+                <td>12/09/2014</td>
+                <td>
+                    <a href="Surovina.html">Detail</a> | <a href="SurovinaEdit.html">Editace</a> | <a href="SurovinaDelete.html">Smazání</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

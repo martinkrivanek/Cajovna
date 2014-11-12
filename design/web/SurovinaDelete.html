@@ -22,31 +22,32 @@
         <a href="asdas"><img src="Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš"/></a>
         <a href="Admin.html">Admin</a>
         >>
-        <a href="PolozkyMenu.html">Položky menu</a> 
+        <a href="Suroviny.html">Suroviny</a> 
         >>
-        <a href="PolozkaMenu.html">Položka menu #69</a>
+        <a href="Surovina.html">Surovina #19</a>
         >>
-        <a href="PolozkaMenuDelete.html">Smazat záznam</a> 
+        <a href="SurovinaDelete.html">Smazat záznam</a> 
     </div>
-    <h2>Smazat položku menu #69</h2>
+    <h2>Smazat surovinu #19</h2>
     <form>
         <label for="name">Název</label>
-        <input type="text" name="name" value="Pouštní duna" disabled/>
+        <input type="text" name="name" value="Pistáciové oříšky" disabled/>
         <br/>
         <label for="description">Popis</label>
         <textarea name="description" cols="40" rows="8" disabled>Někdo zooložka už mj. daří ledu oba sem, u pán. Výzkumného migrují pojmenování řady citoval napíná váš. Bylo tedy průlomovým ať životních spuštění o obdobu otiskli vlastně náplní zájem už součástí.</textarea>
         <br/>
-        <label for="state">Stav</label>
-        <select name="state" disabled>
-            <option>v prodeji</option>
-            <option selected>neprodává se</option>
+        <label for="unit">Veličina</label>
+        <select name="unit" disabled>
+            <option selected>g</option>
+            <option>l</option>
+            <option>ks</option>
         </select>
         <br/>
-        <label for="price_buy">Nákupní cena</label>
-        <input type="number" name="price_buy" value="35" disabled/>CZK
+        <label for="unit_quantity">Jednotka</label>
+        <input type="number" name="unit_quantity" value="100" disabled/> *Množství ve veličině
         <br/>
-        <label for="price_sell">Prodejní cena</label>
-        <input type="number" name="price_sell" value="45" disabled/>CZK
+        <label for="price_unit">Cena / jednotka</label>
+        <input type="number" name="price_unit" value="20" disabled/> CZK
         <br/>
         <input type="submit" value="Smazat"/>
     </form>
