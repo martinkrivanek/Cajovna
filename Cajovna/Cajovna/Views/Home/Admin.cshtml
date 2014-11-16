@@ -1,0 +1,9 @@
+﻿<div id="breadcrumbs">
+    <a href="@Url.Action("Admin", "Admin", "Home")"><img src="~/Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš" /></a>
+    @Html.ActionLink("Admin", "Admin", "Home")
+</div>
+<h2>Admin</h2>
+<ul>
+    <li>@Html.ActionLink("Položky menu", "Index", "PolozkyMenu")</li>
+    <li>@Html.ActionLink("Suroviny", "Index", "Suroviny")</li>
+</ul>

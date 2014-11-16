@@ -1,0 +1,38 @@
+﻿@model Cajovna.Models.Surovina
+@using Cajovna.Models;
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Suroviny")"><img src="~/Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš" /></a>
+    @Html.ActionLink("Admin", "Admin", "Home")
+    >>
+    @Html.ActionLink("Suroviny", "Index", "Suroviny")
+    >>
+    @Html.ActionLink("Vytvořit záznam", "Add", "Suroviny")
+</div>
+<h2>Vytvořit surovinu</h2>
+<form action="/Suroviny/Add" method="post">
+    <input type="hidden" name="date_added" value="@DateTime.Now.ToString()" />
+    <label for="name">Název</label>
+    <input type="text" name="name" value=""/>
+    <br />
+    <label for="desription">Popis</label>
+    <textarea name="desription" cols="40" rows="8"></textarea>
+    <br />
+    <label for="unit">Veličina</label>
+    <select name="unit">
+        <option value="g">g</option>
+        <option value="l">l</option>
+        <option value="ks">ks</option>
+    </select>
+
+
+
+    <br />
+    <label for="number_of_units">Jednotka</label>
+    <input type="number" name="number_of_units" value="" /> *Množství ve veličině
+    <br />
+    <label for="price">Cena / jednotka</label>
+    <input type="number" name="price" value="" /> CZK
+    <br />
+    <input type="submit" value="Vytvořit" />
+</form>

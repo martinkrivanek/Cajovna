@@ -1,0 +1,46 @@
+﻿@model Cajovna.Models.Surovina
+@using Cajovna.Models;
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Suroviny")"><img src="~/Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš" /></a>
+    @Html.ActionLink("Admin", "Admin", "Home")
+    >>
+    @Html.ActionLink("Suroviny", "Index", "Suroviny")
+    >>
+    @Html.ActionLink("Surovina #" + Model.surovinaID, "Detail", "Suroviny", new { id = Model.surovinaID }, null)
+    >>
+    @Html.ActionLink("Upravit záznam", "Edit", "Suroviny", new { id = Model.surovinaID }, null)
+</div>
+<h2>Upravit surovinu #@Model.surovinaID</h2>
+<form action="/Suroviny/Edit" method="post">
+    <input type="hidden" name="surovinaID" value="@Model.surovinaID" />
+    <input type="hidden" name="date_added" value="@Model.date_added.ToString()" />
+    <label for="name">Název</label>
+    <input type="text" name="name" value="@Model.name" />
+    <br />
+    <label for="desription">Popis</label>
+    <textarea name="desription" cols="40" rows="8">@Model.desription</textarea>
+    <br />
+    <label for="unit">Veličina</label>
+    <select name="unit">
+        @foreach (Unit unit in (Unit[])Enum.GetValues(typeof(Unit)))
+        {
+            if (unit.Equals(Model.unit))
+            {
+                <option value="@unit" selected>@unit</option>
+            }
+            else
+            {
+                <option value="@unit">@unit</option>
+            }
+        }
+    </select>
+    <br />
+    <label for="number_of_units">Jednotka</label>
+    <input type="number" name="number_of_units" value="@Model.number_of_units" /> *Množství ve veličině
+    <br />
+    <label for="price">Cena / jednotka</label>
+    <input type="number" name="price" value="@Model.price" /> CZK
+    <br />
+    <input type="submit" value="Upravit" />
+</form>
