@@ -6,39 +6,30 @@ using System.Web;
 
 namespace Cajovna.Models
 {
-
-    public enum Unit
+    public class Ucet
     {
-        g, l, ks
-    }
+        public int ucetID { get; set; }
 
-
-    public class Surovina
-    {
-        public int surovinaID { get; set; }
-
-        [Required]
         public String name { get; set; }
-
-        public String desription { get; set; }
 
         [Required]
         public DateTime date_added { get; set; }
 
-        [Required]
-        public Unit unit { get; set; }
+        public DateTime date_closed { get; set; }
 
         [Required]
-        public double number_of_units { get; set; }
+        public int stulID { get; set; }
+        public virtual Stul stul { get; set; }
 
-        [Required]
-        public double price { get; set; }
+        public virtual List<PolozkaUctu> polozkyUctu { get; set; }
 
 
         // CONTSTRUCTORs
-        public Surovina()
+        public Ucet()
         {
+            name = "Účet #" + ucetID;
             date_added = DateTime.Now;
+            polozkyUctu = new List<PolozkaUctu>();
         }
     }
 }
