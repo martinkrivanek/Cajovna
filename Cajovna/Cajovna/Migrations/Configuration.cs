@@ -62,107 +62,41 @@ namespace Cajovna.Migrations
                 price = 1
             };
 
-            context.Suroviny.AddOrUpdate(
-                s => s.name,
+            List<Surovina> suroviny = new List<Surovina>{
                 sur_pistacie,
                 sur_arasidy,
                 sur_voda,
                 sur_cukr,
                 sur_caj_poustniDuna
-                );
-            #endregion
-
-            #region stoly
-            Stul stul_1 = new Stul { };
-            Stul stul_2 = new Stul { };
-            Stul stul_bar = new Stul{ name = "Bar"};
-            Stul stul_dluhy = new Stul { name = "Dluhy" };
-
-            context.Stoly.AddOrUpdate(
-                s => s.name,
-                stul_1,
-                stul_2,
-                stul_bar,
-                stul_dluhy
-                );
-            #endregion
-
-            #region PolozkyMenu + Slozeni
-            #region Pistacie
-            Slozeni slo_polMenu_pistacie = new Slozeni {
-                surovina = sur_pistacie,
-                quantity = 1
             };
+            suroviny.ForEach(a => context.Suroviny.Add(a));
+            context.SaveChanges();
+            #endregion
 
-            context.Slozeni.AddOrUpdate(
-                slo_polMenu_pistacie                
-                );
-
+            #region PolozkyMenu
             PolozkaMenu polMenu_pistacie = new PolozkaMenu 
             {
                 name = "Pistácie",
                 price_sell = 35,
                 avalible = true,
-                description = "Nìkdo zooloka u mj. daøí ledu oba sem, u pán. Vızkumného migrují pojmenování øady citoval napíná váš. Bylo tedy prùlomovım a ivotních spuštìní o obdobu otiskli vlastnì náplní zájem u souèástí.",
-                recipe = new List<Slozeni>{ slo_polMenu_pistacie }
+                description = "Nìkdo zooloka u mj. daøí ledu oba sem, u pán. Vızkumného migrují pojmenování øady citoval napíná váš. Bylo tedy prùlomovım a ivotních spuštìní o obdobu otiskli vlastnì náplní zájem u souèástí."
             };
-            #endregion
-
-            #region Arasidy
-            Slozeni slo_polMenu_arasidy = new Slozeni
-            {
-                surovina = sur_arasidy,
-                quantity = 1
-            };
-
-            context.Slozeni.AddOrUpdate(
-                slo_polMenu_arasidy
-                );
 
             PolozkaMenu polMenu_arasidy = new PolozkaMenu
             {
                 name = "Arašídy",
                 price_sell = 25,
                 avalible = true,
-                description = "Nìkdo zooloka u mj. daøí ledu oba sem, u pán. Vızkumného migrují pojmenování øady citoval napíná váš. Bylo tedy prùlomovım a ivotních spuštìní o obdobu otiskli vlastnì náplní zájem u souèástí.",
-                recipe = new List<Slozeni> { slo_polMenu_arasidy }
+                description = "Nìkdo zooloka u mj. daøí ledu oba sem, u pán. Vızkumného migrují pojmenování øady citoval napíná váš. Bylo tedy prùlomovım a ivotních spuštìní o obdobu otiskli vlastnì náplní zájem u souèástí."
             };
-            #endregion
-
-            #region PoustniDuna
-            Slozeni slo_polMenu_poustDuna_cukr = new Slozeni
-            {
-                surovina = sur_cukr,
-                quantity = 20
-            };
-
-            Slozeni slo_polMenu_poustDuna_voda = new Slozeni
-            {
-                surovina = sur_voda,
-                quantity = 1
-            };
-
-            Slozeni slo_polMenu_poustDuna_caj = new Slozeni
-            {
-                surovina = sur_caj_poustniDuna,
-                quantity = 20
-            };
-
-            context.Slozeni.AddOrUpdate(
-                slo_polMenu_poustDuna_cukr,
-                slo_polMenu_poustDuna_voda,
-                slo_polMenu_poustDuna_caj
-                );
 
             PolozkaMenu polMenu_poustDuna = new PolozkaMenu
             {
                 name = "Èaj - Pouštní Duna",
                 price_sell = 25,
                 avalible = true,
-                description = "Nìkdo zooloka u mj. daøí ledu oba sem, u pán. Vızkumného migrují pojmenování øady citoval napíná váš. Bylo tedy prùlomovım a ivotních spuštìní o obdobu otiskli vlastnì náplní zájem u souèástí.",
-                recipe = new List<Slozeni> { slo_polMenu_poustDuna_cukr, slo_polMenu_poustDuna_voda, slo_polMenu_poustDuna_caj }
+                description = "Nìkdo zooloka u mj. daøí ledu oba sem, u pán. Vızkumného migrují pojmenování øady citoval napíná váš. Bylo tedy prùlomovım a ivotních spuštìní o obdobu otiskli vlastnì náplní zájem u souèástí."
             };
-            #endregion
 
             context.PolozkyMenu.AddOrUpdate(
                 s => s.name,
@@ -170,103 +104,138 @@ namespace Cajovna.Migrations
                 polMenu_arasidy,
                 polMenu_poustDuna
                 );
+            List<PolozkaMenu> polMenu = new List<PolozkaMenu>{
+                polMenu_pistacie,
+                polMenu_arasidy,
+                polMenu_poustDuna
+            };
+            polMenu.ForEach(a => context.PolozkyMenu.Add(a));
+            context.SaveChanges();
             #endregion
 
-            #region ucty + polozkyUctu
-            #region bar
-            PolozkaUctu polUctu_bar_1 = new PolozkaUctu { polozkaMenu = polMenu_pistacie };
-            PolozkaUctu polUctu_bar_2 = new PolozkaUctu { polozkaMenu = polMenu_pistacie };
-            PolozkaUctu polUctu_bar_3 = new PolozkaUctu { polozkaMenu = polMenu_arasidy };
-            PolozkaUctu polUctu_bar_4 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna };
-            PolozkaUctu polUctu_bar_5 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna };
-            PolozkaUctu polUctu_bar_6 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna };
-
-            context.PolozkyUctu.AddOrUpdate(
-                polUctu_bar_1,
-                polUctu_bar_2,
-                polUctu_bar_3,
-                polUctu_bar_4,
-                polUctu_bar_5,
-                polUctu_bar_6
-                );
-
-            Ucet ucet_bar_vlevo = new Ucet
+            #region Slozeni
+            Slozeni slo_polMenu_pistacie = new Slozeni
             {
-                name = "vlevo od pípy",
-                stul = stul_bar,
-                polozkyUctu = new List<PolozkaUctu> { polUctu_bar_1, polUctu_bar_3, polUctu_bar_4 }
+                surovina = sur_pistacie,
+                quantity = 1,
+                polozkaMenu = polMenu_pistacie
             };
 
-            Ucet ucet_bar_vpravo = new Ucet
+            Slozeni slo_polMenu_arasidy = new Slozeni
             {
-                name = "vpravo od pípy",
-                stul = stul_bar,
-                polozkyUctu = new List<PolozkaUctu> { polUctu_bar_2, polUctu_bar_5, polUctu_bar_6 }
+                surovina = sur_arasidy,
+                quantity = 1,
+                polozkaMenu = polMenu_arasidy
             };
+
+            Slozeni slo_polMenu_poustDuna_cukr = new Slozeni
+            {
+                surovina = sur_cukr,
+                quantity = 20,
+                polozkaMenu = polMenu_poustDuna
+            };
+
+            Slozeni slo_polMenu_poustDuna_voda = new Slozeni
+            {
+                surovina = sur_voda,
+                quantity = 1,
+                polozkaMenu = polMenu_poustDuna
+            };
+
+            Slozeni slo_polMenu_poustDuna_caj = new Slozeni
+            {
+                surovina = sur_caj_poustniDuna,
+                quantity = 20,
+                polozkaMenu = polMenu_poustDuna
+            };
+
+            List<Slozeni> slozeni = new List<Slozeni>{
+                slo_polMenu_pistacie,                
+                slo_polMenu_arasidy,                
+                slo_polMenu_poustDuna_cukr,
+                slo_polMenu_poustDuna_voda,
+                slo_polMenu_poustDuna_caj
+            };
+            slozeni.ForEach(a => context.Slozeni.Add(a));
+            context.SaveChanges();
             #endregion
 
-            #region stul1
-            PolozkaUctu polUctu_1_1 = new PolozkaUctu { polozkaMenu = polMenu_pistacie };
-            PolozkaUctu polUctu_1_2 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna };
-            PolozkaUctu polUctu_1_3 = new PolozkaUctu { polozkaMenu = polMenu_arasidy };
-            PolozkaUctu polUctu_1_4 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna };
-            PolozkaUctu polUctu_1_5 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna };
+            #region stoly
+            Stul stul_1 = new Stul { };
+            Stul stul_2 = new Stul { };
+            Stul stul_bar = new Stul { name = "Bar" };
+            Stul stul_dluhy = new Stul { name = "Dluhy" };
 
-            context.PolozkyUctu.AddOrUpdate(
-                polUctu_1_1,
-                polUctu_1_2,
-                polUctu_1_3,
-                polUctu_1_4,
-                polUctu_1_5
-                );
-
-            Ucet ucet_1 = new Ucet
-            {
-                stul = stul_1,
-                polozkyUctu = new List<PolozkaUctu> { polUctu_1_1, polUctu_1_2, polUctu_1_3, polUctu_1_4, polUctu_1_5 }
+            List<Stul> stoly = new List<Stul>{
+                stul_1,
+                stul_2,
+                stul_bar,
+                stul_dluhy
             };
+            stoly.ForEach(a => context.Stoly.Add(a));
+            context.SaveChanges();
             #endregion
 
-            #region stul2
-            PolozkaUctu polUctu_2_1 = new PolozkaUctu { polozkaMenu = polMenu_arasidy };
-            PolozkaUctu polUctu_2_2 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna };
+            #region ucty
+            Ucet ucet_bar_vlevo = new Ucet { name = "vlevo od pípy", stul = stul_bar };
+            Ucet ucet_bar_vpravo = new Ucet { name = "vpravo od pípy", stul = stul_bar };
+            Ucet ucet_1 = new Ucet { stul = stul_1 };
+            Ucet ucet_2 = new Ucet { stul = stul_2 };
+            Ucet ucet_dluhy_jarda = new Ucet { name = "Jarda Petarda", stul = stul_dluhy };
 
-            context.PolozkyUctu.AddOrUpdate(
-                polUctu_2_1,
-                polUctu_2_2
-                );
-
-            Ucet ucet_2 = new Ucet
-            {
-                stul = stul_2,
-                polozkyUctu = new List<PolozkaUctu> { polUctu_2_1, polUctu_2_2 }
-            };
-            #endregion
-
-            #region dluhy
-            PolozkaUctu polUctu_dluhy_1 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna };
-            PolozkaUctu polUctu_dluhy_2 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna };
-
-            context.PolozkyUctu.AddOrUpdate(
-                polUctu_dluhy_1,
-                polUctu_dluhy_2
-                );
-
-            Ucet ucet_dluhy_jarda = new Ucet
-            {
-                name = "Jarda Petarda",
-                stul = stul_2,
-                polozkyUctu = new List<PolozkaUctu> { polUctu_dluhy_1, polUctu_dluhy_2 }
-            };
-            #endregion
-
-            context.Ucty.AddOrUpdate(
+            List<Ucet> ucty = new List<Ucet>{
                 ucet_bar_vlevo,
                 ucet_bar_vpravo,
                 ucet_1,
                 ucet_2,
                 ucet_dluhy_jarda
-                );
+            };
+            ucty.ForEach(a => context.Ucty.Add(a));
+            context.SaveChanges();
+            #endregion
+
+            #region polozkyUctu
+            PolozkaUctu polUctu_bar_1 = new PolozkaUctu { polozkaMenu = polMenu_pistacie, ucet = ucet_bar_vlevo };
+            PolozkaUctu polUctu_bar_2 = new PolozkaUctu { polozkaMenu = polMenu_pistacie, ucet = ucet_bar_vpravo };
+            PolozkaUctu polUctu_bar_3 = new PolozkaUctu { polozkaMenu = polMenu_arasidy, ucet = ucet_bar_vlevo };
+            PolozkaUctu polUctu_bar_4 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna, ucet = ucet_bar_vlevo };
+            PolozkaUctu polUctu_bar_5 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna, ucet = ucet_bar_vpravo };
+            PolozkaUctu polUctu_bar_6 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna, ucet = ucet_bar_vpravo };
+
+            PolozkaUctu polUctu_1_1 = new PolozkaUctu { polozkaMenu = polMenu_pistacie, ucet = ucet_1 };
+            PolozkaUctu polUctu_1_2 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna, ucet = ucet_1 };
+            PolozkaUctu polUctu_1_3 = new PolozkaUctu { polozkaMenu = polMenu_arasidy, ucet = ucet_1 };
+            PolozkaUctu polUctu_1_4 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna, ucet = ucet_1 };
+            PolozkaUctu polUctu_1_5 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna, ucet = ucet_1 };
+
+            PolozkaUctu polUctu_2_1 = new PolozkaUctu { polozkaMenu = polMenu_arasidy, ucet = ucet_2 };
+            PolozkaUctu polUctu_2_2 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna, ucet = ucet_2 };
+
+            PolozkaUctu polUctu_dluhy_1 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna, ucet = ucet_dluhy_jarda };
+            PolozkaUctu polUctu_dluhy_2 = new PolozkaUctu { polozkaMenu = polMenu_poustDuna, ucet = ucet_dluhy_jarda };
+
+            List<PolozkaUctu> polUctu = new List<PolozkaUctu>{
+                polUctu_bar_1,
+                polUctu_bar_2,
+                polUctu_bar_3,
+                polUctu_bar_4,
+                polUctu_bar_5,
+                polUctu_bar_6,
+
+                polUctu_1_1,
+                polUctu_1_2,
+                polUctu_1_3,
+                polUctu_1_4,
+                polUctu_1_5,
+
+                polUctu_2_1,
+                polUctu_2_2,
+
+                polUctu_dluhy_1,
+                polUctu_dluhy_2
+            };
+            polUctu.ForEach(a => context.PolozkyUctu.Add(a));
+            context.SaveChanges();
             #endregion
         }
     }
