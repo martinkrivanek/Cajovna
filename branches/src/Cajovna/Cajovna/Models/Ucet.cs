@@ -27,9 +27,19 @@ namespace Cajovna.Models
         // CONTSTRUCTORs
         public Ucet()
         {
-            name = "Účet #" + ucetID;
             date_added = DateTime.Now;
             polozkyUctu = new List<PolozkaUctu>();
+        }
+
+
+        // METHODs
+        public double price_total(){
+            double total = 0;
+            foreach (PolozkaUctu item in polozkyUctu)
+            {
+                total += item.price();
+            }
+            return total;
         }
     }
 }

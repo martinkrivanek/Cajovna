@@ -17,7 +17,6 @@ namespace Cajovna.Models
         // CONTSTRUCTORs
         public Stul()
         {
-            name = "Stůl #" + stulID;
             ucty = new List<Ucet>();
         }
     }

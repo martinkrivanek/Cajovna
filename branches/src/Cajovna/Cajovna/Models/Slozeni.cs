@@ -11,11 +11,15 @@ namespace Cajovna.Models
         public int slozeniID { get; set; }
 
         [Required]
-        public int quantity { get; set; }
+        public double quantity { get; set; }
 
         [Required]
         public int surovinaID { get; set; }
         public virtual Surovina surovina { get; set; }
+
+        [Required]
+        public int polozkaMenuID { get; set; }
+        public virtual PolozkaMenu polozkaMenu { get; set; }
 
 
         // METHODs

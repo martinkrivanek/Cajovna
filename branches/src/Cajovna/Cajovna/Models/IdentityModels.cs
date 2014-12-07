@@ -21,6 +21,19 @@ namespace Cajovna.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Surovina> Suroviny { get; set; }
+        public DbSet<Stul> Stoly { get; set; }
+        public DbSet<Ucet> Ucty { get; set; }
+        public DbSet<Slozeni> Slozeni { get; set; }
+        public DbSet<PolozkaMenu> PolozkyMenu { get; set; }
+        public DbSet<PolozkaUctu> PolozkyUctu { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Stul>().HasMany(a => a.ucty).WithRequired(b => b.stul).HasForeignKey(c => c.stulID);
+            modelBuilder.Entity<Ucet>().HasMany(a => a.polozkyUctu).WithRequired(b => b.ucet).HasForeignKey(c => c.ucetID);
+            modelBuilder.Entity<PolozkaMenu>().HasMany(a => a.recipe).WithRequired(b => b.polozkaMenu).HasForeignKey(c => c.polozkaMenuID);
+        }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
