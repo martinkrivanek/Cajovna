@@ -15,7 +15,7 @@ namespace Cajovna.Models
         [Required]
         public DateTime date_added { get; set; }
 
-        public DateTime date_closed { get; set; }
+        public DateTime? date_closed { get; set; }
 
         [Required]
         public int stulID { get; set; }

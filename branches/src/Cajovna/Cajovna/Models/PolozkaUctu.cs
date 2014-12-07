@@ -13,7 +13,7 @@ namespace Cajovna.Models
         [Required]
         public DateTime date_ordered { get; set; }
 
-        public DateTime date_paid { get; set; }
+        public DateTime? date_paid { get; set; }
 
         [Required]
         public int polozkaMenuID { get; set; }
