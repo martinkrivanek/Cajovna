@@ -19,10 +19,20 @@ namespace Cajovna.Models
         public int polozkaMenuID { get; set; }
         public virtual PolozkaMenu polozkaMenu { get; set; }
 
+        [Required]
+        public int ucetID { get; set; }
+        public virtual Ucet ucet { get; set; }
+
         // CONTSTRUCTORs
         public PolozkaUctu()
         {
             date_ordered = DateTime.Now;
+        }
+
+
+        // METHODs
+        public double price(){
+            return polozkaMenu.price_sell;
         }
     }
 }

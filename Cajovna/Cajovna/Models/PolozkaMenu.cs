@@ -10,7 +10,7 @@ namespace Cajovna.Models
     {
         public int polozkaMenuID { get; set; }
 
-        public double prize_sell { get; set; }
+        public double price_sell { get; set; }
 
         [Required]
         public DateTime date_added { get; set; }
@@ -35,7 +35,7 @@ namespace Cajovna.Models
         }
 
         // METHODs
-        public double prize_buy()
+        public double price_buy()
         {
             double total = 0;
             foreach (Slozeni item in recipe)
