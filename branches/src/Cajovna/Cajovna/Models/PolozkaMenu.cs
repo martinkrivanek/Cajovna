@@ -26,7 +26,7 @@ namespace Cajovna.Models
         public virtual List<Slozeni> recipe { get; set; }
 
 
-        // CONTSTRUCTORs
+        // CONSTRUCTORs
         public PolozkaMenu()
         {
             recipe = new List<Slozeni>();
@@ -34,7 +34,9 @@ namespace Cajovna.Models
             date_added = DateTime.Now;
         }
 
+
         // METHODs
+        /* calculates and returns the total buying price of the materials */
         public double price_buy()
         {
             double total = 0;
@@ -43,6 +45,13 @@ namespace Cajovna.Models
                 total += item.price();
             }
             return total;
+        }
+
+        /* creates and returns the string of the specific accesibility */
+        public String getAccesibility()
+        {
+            // in the future, there will be check if the materials are in stock
+            return (avalible) ? "v prodeji" : "neprodává se";
         }
     }
 }

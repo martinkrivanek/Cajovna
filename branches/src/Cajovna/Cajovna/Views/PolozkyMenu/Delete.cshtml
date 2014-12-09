@@ -1,0 +1,46 @@
+﻿@model Cajovna.Models.PolozkaMenu
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Admin", "Home")"><img src="~/Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš" /></a>
+    @Html.ActionLink("Admin", "Admin", "Home")
+    >>
+    @Html.ActionLink("Položky menu", "Index", "PolozkyMenu")
+    >>
+    @Html.ActionLink("Položka menu #" + Model.polozkaMenuID, "Detail", "PolozkyMenu", new { id = Model.polozkaMenuID }, null)
+    >>
+    @Html.ActionLink("Smazat záznam", "Delete", "PolozkyMenu", new { id = Model.polozkaMenuID }, null)
+</div>
+
+<h2>Smazat položku menu #@Model.polozkaMenuID</h2>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <label for="name">Název</label>
+        <input type="text" name="name" value="@Model.name" disabled/>
+        <br />
+        <label for="description">Popis</label>
+        <textarea name="description" cols="40" rows="8" disabled>@Model.description</textarea>
+        <br />
+        <label for="avalible">Stav</label>
+        <select name="avalible" disabled>
+            @if (Model.avalible)
+            {
+                <option value="true" selected>v prodeji</option>
+                <option value="false">neprodává se</option>
+            }
+            else
+            {
+                <option value="true">v prodeji</option>
+                <option value="false" selected>neprodává se</option>
+            }
+        </select>
+        <br />
+        <label for="price_buy">Nákupní cena</label>
+        <input type="number" name="price_buy" value="@Model.price_buy()" disabled />
+        <br />
+        <label for="price_sell">Prodejní cena</label>
+        <input type="number" name="price_sell" value="@Model.price_sell" disabled/>
+        <br />
+        <input type="submit" value="Smazat" />
+            
+    }

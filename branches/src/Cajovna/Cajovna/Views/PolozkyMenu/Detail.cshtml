@@ -1,0 +1,69 @@
+﻿@model Cajovna.Models.PolozkaMenu
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Admin", "Home")"><img src="~/Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš" /></a>
+    @Html.ActionLink("Admin", "Admin", "Home")
+    >>
+    @Html.ActionLink("Položky menu", "Index", "PolozkyMenu")
+    >>
+    @Html.ActionLink("Položka menu #" + Model.polozkaMenuID, "Detail", "PolozkyMenu", new { id = Model.polozkaMenuID }, null)
+</div>
+
+<h2>@Model.name<small>(Položka menu #@Model.polozkaMenuID - @Html.ActionLink("Editovat", "Edit", "PolozkyMenu", new { id = Model.polozkaMenuID }, null) - @Html.ActionLink("Smazat", "Delete", "PolozkyMenu", new { id = Model.polozkaMenuID }, null))</small></h2>
+
+<table id="detail">
+    <tr>
+        <th>Popis:</th>
+        <td>@Model.description</td>
+    </tr>
+    <tr>
+        <th>Dostupnost:</th>
+        <td>@Model.getAccesibility()</td>
+    </tr>
+    <tr>
+        <th>Datum&nbsp;přidání:</th>
+        <td>@Model.date_added.ToString("dd\\/M\\/yyyy")</td>
+    </tr>
+    <tr>
+        <th>Nákupní&nbsp;cena:</th>
+        <td>@Model.price_buy()&nbsp;CZK</td>
+    </tr>
+    <tr>
+        <th>Prodejní&nbsp;cena:</th>
+        <td>@Model.price_sell&nbsp;CZK</td>
+    </tr>
+    <!-- NOT YET IMPLEMENTED
+    <tr>
+        <th>Štítky:</th>
+        <td><a href="asda">Čaj</a>, <a href="asda">Černý čaj</a></td>
+    </tr>
+        -->
+</table>
+
+<h3>Složení:<small>@Html.ActionLink("+ Přidat nový záznam", "Add", "Slozeni", new { id = Model.polozkaMenuID }, null)</small></h3>
+@if (Model.recipe.Count == 0)
+{
+    <p class="count_0">Ve složení není zatím žádná položka</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Název</th>
+                <th>Množství</th>
+                <th>Operace</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Cajovna.Models.Slozeni slozeni in Model.recipe)
+            {
+                <tr>
+                    <td>@slozeni.surovina.name</td>
+                    <td>@slozeni.totalQuantity()&nbsp;@slozeni.unit().ToString()</td>
+                    <td>@Html.ActionLink("Editace", "Edit", "Slozeni", new { id = slozeni.slozeniID }, null) | @Html.ActionLink("Smazání", "Delete", "Slozeni", new { id = slozeni.slozeniID }, null)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

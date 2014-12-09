@@ -23,9 +23,22 @@ namespace Cajovna.Models
 
 
         // METHODs
-        internal double price()
+        /* returns the total price for the material in the quantity */
+        public double price()
         {
             return quantity * surovina.price;
+        }
+
+        /* returns the total quantity for the material */
+        public double totalQuantity()
+        {
+            return quantity * surovina.number_of_units;
+        }
+
+        /* returns the unit of the material*/
+        public Unit unit()
+        {
+            return surovina.unit;
         }
     }
 }

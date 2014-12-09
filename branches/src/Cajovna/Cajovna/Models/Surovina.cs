@@ -35,7 +35,7 @@ namespace Cajovna.Models
         public double price { get; set; }
 
 
-        // CONTSTRUCTORs
+        // CONSTRUCTORs
         public Surovina()
         {
             date_added = DateTime.Now;

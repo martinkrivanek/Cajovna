@@ -23,7 +23,8 @@ namespace Cajovna.Models
         public int ucetID { get; set; }
         public virtual Ucet ucet { get; set; }
 
-        // CONTSTRUCTORs
+
+        // CONSTRUCTORs
         public PolozkaUctu()
         {
             date_ordered = DateTime.Now;
@@ -31,6 +32,7 @@ namespace Cajovna.Models
 
 
         // METHODs
+        /* calculates the price of this object */ 
         public double price(){
             return polozkaMenu.price_sell;
         }

@@ -24,7 +24,7 @@ namespace Cajovna.Models
         public virtual List<PolozkaUctu> polozkyUctu { get; set; }
 
 
-        // CONTSTRUCTORs
+        // CONSTRUCTORs
         public Ucet()
         {
             date_added = DateTime.Now;
@@ -33,6 +33,8 @@ namespace Cajovna.Models
 
 
         // METHODs
+        /* calculates and returns the total price of this account in case 
+         * the customers would like to pay everything at once*/ 
         public double price_total(){
             double total = 0;
             foreach (PolozkaUctu item in polozkyUctu)
