@@ -1,0 +1,47 @@
+﻿@model Cajovna.Models.Slozeni
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Admin", "Home")"><img src="~/Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš" /></a>
+    @Html.ActionLink("Admin", "Admin", "Home")
+    >>
+    @Html.ActionLink("Položky menu", "Index", "PolozkyMenu")
+    >>
+    @Html.ActionLink("Položka menu #" + Model.polozkaMenuID, "Detail", "PolozkyMenu", new { id = Model.polozkaMenuID }, null)
+    >>
+    @Html.ActionLink("Upravit záznam složení #" + Model.slozeniID, "Edit", "Slozeni", new { id = Model.polozkaMenuID }, null)
+</div>
+
+<h2>Upravit záznam složení #@Model.slozeniID</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    if (!String.IsNullOrEmpty(ViewBag.errors))
+    {
+        <p class="validation_error">@ViewBag.errors</p>
+        <br />
+    }
+    <input type="hidden" name="slozeniID" value="@Model.slozeniID" />
+    <input type="hidden" name="polozkaMenuID" value="@Model.polozkaMenuID" />
+
+    <label for="surovinaID">Surovina</label>
+    <select name="surovinaID">
+        @foreach (Cajovna.Models.Surovina surovina in ViewBag.suroviny)
+        {
+            if (Model != null && Model.surovinaID != null && surovina.surovinaID == Model.surovinaID)
+            {
+                <option value="@surovina.surovinaID" selected>@surovina.name (@(surovina.number_of_units)@surovina.unit.ToString())</option>
+            }
+            else
+            {
+                <option value="@surovina.surovinaID">@surovina.name (@(surovina.number_of_units)@surovina.unit.ToString())</option>
+            }
+        }
+    </select>
+    <br />
+    <label for="quantity">Množství</label>
+    <input type="number" name="quantity" value="@Model.quantity" />
+    <br />
+    <input type="submit" value="Upravit" />
+}

@@ -161,6 +161,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PolozkyMenuController.cs" />
+    <Compile Include="Controllers\SlozeniController.cs" />
     <Compile Include="Controllers\SurovinyController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
@@ -251,10 +253,17 @@
     <Content Include="Views\Suroviny\Add.cshtml" />
     <Content Include="Views\Suroviny\Edit.cshtml" />
     <Content Include="Views\Suroviny\Delete.cshtml" />
+    <Content Include="Views\PolozkyMenu\Index.cshtml" />
+    <Content Include="Views\PolozkyMenu\Detail.cshtml" />
+    <Content Include="Views\PolozkyMenu\Add.cshtml" />
+    <Content Include="Views\PolozkyMenu\Edit.cshtml" />
+    <Content Include="Views\PolozkyMenu\Delete.cshtml" />
+    <Content Include="Views\Slozeni\Add.cshtml" />
+    <Content Include="Views\Slozeni\Edit.cshtml" />
+    <Content Include="Views\Slozeni\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

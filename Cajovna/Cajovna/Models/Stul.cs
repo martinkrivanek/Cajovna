@@ -14,7 +14,7 @@ namespace Cajovna.Models
         public virtual List<Ucet> ucty { get; set; }
 
 
-        // CONTSTRUCTORs
+        // CONSTRUCTORs
         public Stul()
         {
             ucty = new List<Ucet>();

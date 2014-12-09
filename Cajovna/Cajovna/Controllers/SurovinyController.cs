@@ -12,7 +12,7 @@ namespace Cajovna.Controllers
     public class SurovinyController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        const int items_on_page = 2;
+        const int items_on_page = 3;
 
         public ActionResult Index(String sort, int page = 1)
         {            
@@ -85,6 +85,7 @@ namespace Cajovna.Controllers
 
 
         // HELPERs
+        /* creates a dictionary of values and text to define sort html select options*/
         private Dictionary<string, string> getSurovinySortList()
         {
             Dictionary<string, string> sortlist = new Dictionary<string, string>();
@@ -97,6 +98,7 @@ namespace Cajovna.Controllers
             return sortlist;
         }
 
+        /* returns list of PolozkaMenu objects with paging and sorted accordingly */
         private List<Surovina> getSuroviny(int page, String sort)
         {
             List<Surovina> suroviny = db.Suroviny.ToList();

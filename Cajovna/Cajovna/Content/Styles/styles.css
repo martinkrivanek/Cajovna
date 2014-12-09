@@ -45,6 +45,17 @@ table {
 
 
 /* START ------------------------------------------------------ */
+@font-face {
+    font-family: Kozuka Gothic Pr6N;
+    src: url(../Fonts/KozGoPr6N-Regular.otf);
+}
+
+@font-face {
+    font-family: Kozuka Gothic Pr6N;
+    src: url(../Fonts/KozGoPr6N-Bold.otf);
+    font-weight: bold;
+}
+
 body{
     width: 924px;
     padding: 0 50px 40px 50px;
@@ -244,3 +255,7 @@ label {
     margin-bottom: .2em;
 }
 
+/* FORM ------------------------------*/
+.validation_error {
+    color: red;
+}
