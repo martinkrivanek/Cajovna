@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Cajovna.Models.Stul>
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Admin", "Home")"><img src="~/Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš" /></a>
+    @Html.ActionLink("Admin", "Admin", "Home")
+    >>
+    @Html.ActionLink("Stoly", "Index", "Stul")
+</div>
+<h2>Stoly<small>(Počet záznamů: @Model.Count())</small></h2>
+<p>@Html.ActionLink("+ Vytvořit nový záznam", "Add", "Stul")</p>
+
+@foreach (Cajovna.Models.Stul stul in Model)
+{
+    <h3>
+        STŮL #@(stul.stulID)@(String.IsNullOrEmpty(stul.name) ? "" : " - " + stul.name)
+        <small>( @Html.ActionLink("Detail", "Detail", "Stul", new { id = stul.stulID }, null) | @Html.ActionLink("Editace", "Edit", "Stul", new { id = stul.stulID }, null) | @Html.ActionLink("Smazání", "Delete", "Stul", new { id = stul.stulID }, null) )</small>
+    </h3>
+    <ul class="ucty">
+        @foreach (Cajovna.Models.Ucet ucet in stul.ucty.Where(a => a.date_closed == null))
+        {
+            <li>@Html.ActionLink("Ůčet #" + ucet.ucetID + (String.IsNullOrEmpty(ucet.name) ? "" : " - " + ucet.name), "Detail", "Ucet", new { id = ucet.ucetID }, null)</li>
+        }
+    </ul>
+}
