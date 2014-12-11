@@ -259,3 +259,15 @@ label {
 .validation_error {
     color: red;
 }
+
+
+/* STOLY ------------------------------*/
+ul.ucty {
+    margin-bottom: 25px;
+}
+
+ul.ucty li{
+    line-height: 1.5em;
+    list-style: none;
+    margin-left: 25px;
+}

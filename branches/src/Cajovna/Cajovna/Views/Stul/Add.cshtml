@@ -1,0 +1,18 @@
+﻿@model Cajovna.Models.Stul
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Stul")"><img src="~/Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš" /></a>
+    @Html.ActionLink("Admin", "Admin", "Home")
+    >>
+    @Html.ActionLink("Stoly", "Index", "Stul")
+    >>
+    @Html.ActionLink("Vytvořit záznam", "Add", "Stul")
+</div>
+
+<h2>Vytvořit záznam o stole</h2>
+<form action="/Stul/Add" method="post">
+    <label for="name">Název</label>
+    <input type="text" name="name" value="" />
+    <br />
+    <input type="submit" value="Vytvořit" />
+</form>

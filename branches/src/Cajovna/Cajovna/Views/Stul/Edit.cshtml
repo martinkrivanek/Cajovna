@@ -1,0 +1,23 @@
+﻿@model Cajovna.Models.Stul
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Stul")"><img src="~/Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš" /></a>
+    @Html.ActionLink("Admin", "Admin", "Home")
+    >>
+    @Html.ActionLink("Stoly", "Index", "Stul")
+    >>
+    @Html.ActionLink("Stůl #" + Model.stulID, "Detail", "Stul", new { id = Model.stulID }, null)
+    >>
+    @Html.ActionLink("Upravit záznam", "Edit", "Stul", new { id = Model.stulID }, null)
+</div>
+
+<h2>Upravit stůl #@Model.stulID</h2>
+<form action="/Stul/Edit/" method="post">
+    <input type="hidden" name="stulID" value="@Model.stulID" />
+
+    <label for="name">Název</label>
+    <input type="text" name="name" value="@Model.name" />
+    <br />
+
+ <p>   <input type="submit" value="Upravit" /> </p>
+</form>
