@@ -9,11 +9,14 @@ using System.Web.Mvc;
 
 namespace Cajovna.Controllers
 {
+    /* Controller servicing actions of Surovina entity */
     public class SurovinyController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         const int items_on_page = 3;
 
+        /* Action which returns a view to show LIST of Surovina objects in order defined 
+         * by the input parameter sort with proper paging defined by the input parameter page */
         public ActionResult Index(String sort, int page = 1)
         {            
             ViewBag.totalItems = db.Suroviny.Count();
@@ -24,6 +27,7 @@ namespace Cajovna.Controllers
             return View(getSuroviny(page, sort));
         }
 
+        /* Action which returns a view to show DETAIL of Surovina object defined by the input parameter id */
         public ActionResult Detail(int id = 0)
         {
             Surovina surovina = db.Suroviny.Find(id);
@@ -31,11 +35,15 @@ namespace Cajovna.Controllers
             return View(surovina);
         }
 
+        /* Get method action which returns a view to CREATE a Surovina*/
         public ActionResult Add()
         {
             return View();
         }
 
+        /* Post method action which processes (CREATES) the Surovina object given back by the
+         * submitted get method. In failure scenario it returns back the object and challenges
+         * the user to make some necessary changes */
         [HttpPost]
         public ActionResult Add(Surovina surovina)
         {
@@ -48,6 +56,7 @@ namespace Cajovna.Controllers
             return View(surovina);
         }
 
+        /* Get method action which returns a view to EDIT a Surovina acordingly to the input id paremeter*/
         public ActionResult Edit(int id = 0)
         {
             Surovina surovina = db.Suroviny.Find(id);
@@ -55,6 +64,9 @@ namespace Cajovna.Controllers
             return View(surovina);
         }
 
+        /* Post method action which processes (EDITS) the Surovina object given back by the
+         * submitted get method. In failure scenario it returns back the object and challenges
+         * the user to make some necessary changes */
         [HttpPost]
         public ActionResult Edit(Surovina surovina)
         {
@@ -67,6 +79,7 @@ namespace Cajovna.Controllers
             return View(surovina);
         }
 
+        /* Get method action which returns a view to DELETE a Surovina acordingly to the input id paremeter*/
         public ActionResult Delete(int id = 0)
         {
             Surovina surovina = db.Suroviny.Find(id);
@@ -74,6 +87,9 @@ namespace Cajovna.Controllers
             return View(surovina);
         }
 
+        /* Post method action which processes (DELETES) the Surovina object which the input 
+         * id parameter was given back by the submitted get method defines. In failure scenario it 
+         * returns back the object and challenges the user to make some necessary changes */
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {

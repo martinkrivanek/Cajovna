@@ -10,12 +10,15 @@ using System.Text;
 
 namespace Cajovna.Controllers
 {
+    /* Controller servicing actions of Ucet entity */
     public class UcetController : Controller
     {
 
         private ApplicationDbContext db = new ApplicationDbContext();
-        const int items_on_page = 10;        
+        const int items_on_page = 10;
 
+        /* Action which returns a view to show LIST of Ucet objects in order defined 
+         * by the input parameter sort with proper paging defined by the input parameter page */
         public ActionResult Index(String sort, int page = 1)
         {
             ViewBag.totalItems = db.Ucty.Count();
@@ -26,6 +29,7 @@ namespace Cajovna.Controllers
             return View(getUcty(page, sort));            
         }
 
+        /* Action which returns a view to show DETAIL of Ucet object defined by the input parameter id */
         public ActionResult Detail(int id = 0)
         {
             Ucet ucet = db.Ucty.Find(id);
@@ -33,6 +37,7 @@ namespace Cajovna.Controllers
             return View(ucet);
         }
 
+        /* Get method action which returns a view to CREATE a Ucet to the Stul defined by the input id parameter*/
         public ActionResult Add(int id = 0)
         {
             if (db.Stoly.Find(id) == null)
@@ -43,6 +48,9 @@ namespace Cajovna.Controllers
             return View();
         }
 
+        /* Post method action which processes (CREATES) the PolozkaMenu object given back by the
+         * submitted get method. In failure scenario it returns back the object and challenges
+         * the user to make some necessary changes */
         [HttpPost]
         public ActionResult Add(Ucet ucet)
         {
@@ -56,6 +64,7 @@ namespace Cajovna.Controllers
             return View(ucet);
         }
 
+        /* Get method action which returns a view to EDIT a Ucet acordingly to the input id paremeter*/
         public ActionResult Edit(int id = 0)
         {
             Ucet ucet = db.Ucty.Find(id);
@@ -63,6 +72,9 @@ namespace Cajovna.Controllers
             return View(ucet);
         }
 
+        /* Post method action which processes (EDITS) the Ucet object given back by the
+         * submitted get method. In failure scenario it returns back the object and challenges
+         * the user to make some necessary changes */
         [HttpPost]
         public ActionResult Edit(Ucet ucet)
         {
@@ -75,6 +87,7 @@ namespace Cajovna.Controllers
             return View(ucet);
         }
 
+        /* Get method action which returns a view to DELETE a Ucet acordingly to the input id paremeter*/
         public ActionResult Delete(int id = 0)
         {
             Ucet ucet = db.Ucty.Find(id);
@@ -82,6 +95,9 @@ namespace Cajovna.Controllers
             return View(ucet);
         }
 
+        /* Post method action which processes (DELETES) the Ucet object which the input 
+         * id parameter was given back by the submitted get method defines. In failure scenario it 
+         * returns back the object and challenges the user to make some necessary changes */
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -96,6 +112,7 @@ namespace Cajovna.Controllers
             return RedirectToAction("Detail", "Stul", new { id = ucet.stulID });
         }
 
+        /* Get method action which returns a view to MOVE a Ucet defined by the input id parameter to a different Stul */
         public ActionResult MoveUcet(int id = 0) // ucetID
         {
             Ucet ucet = db.Ucty.Find(id);
@@ -104,6 +121,9 @@ namespace Cajovna.Controllers
             return View(ucet);
         }
 
+        /* Post method action which processes (EDITES) the Ucet object which the input 
+         * id parameter was given back by the submitted get method defines. In failure scenario it 
+         * returns back the object and challenges the user to make some necessary changes */
         [HttpPost]
         public ActionResult MoveUcet(Ucet ucet)
         {
@@ -116,13 +136,17 @@ namespace Cajovna.Controllers
             return View(ucet);
         }
 
+        /* Get method action which returns a view to PAY some PolozkaUcet objects of an Ucet defined by the input id parameter*/
         public ActionResult Pay(int id = 0)
         {
             Ucet ucet = db.Ucty.Find(id);
             if (ucet == null) return HttpNotFound();
             return View(ucet);
         }
-
+        
+        /* Post method action which processes (PAYS) the PolozkaUctu objects which the input 
+         * ids parameters were given back by the submitted get method defines. In failure scenario it 
+         * returns back the object and challenges the user to make some necessary changes */
         [HttpPost]
         public ActionResult Pay(int[] polozkyUctuIDs, int ucetID)
         {

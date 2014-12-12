@@ -8,11 +8,14 @@ using System.Web.Mvc;
 
 namespace Cajovna.Controllers
 {
+    /* Controller servicing actions of Slozeni entity */
     public class SlozeniController : Controller
     {
 
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        /* Get method action which returns a view to CREATE a Slozeni of an PolozkaMenu 
+         * object defined by the input ID parameter */
         public ActionResult Add(int id = 0) // = ID polozkyMenu
         {
             PolozkaMenu polozkaMenu = db.PolozkyMenu.Find(id);
@@ -22,6 +25,9 @@ namespace Cajovna.Controllers
             return View();
         }
 
+        /* Post method action which processes (CREATES) the Slozeni object given back by the
+         * submitted get method. In failure scenario it returns back the object and challenges
+         * the user to make some necessary changes */
         [HttpPost]
         public ActionResult Add(Slozeni slozeni)
         {
@@ -40,6 +46,7 @@ namespace Cajovna.Controllers
             return View(slozeni);
         }
 
+        /* Get method action which returns a view to EDIT a Slozeni acordingly to the input id paremeter*/
         public ActionResult Edit(int id = 0)
         {
             Slozeni slozeni = db.Slozeni.Find(id);
@@ -48,6 +55,9 @@ namespace Cajovna.Controllers
             return View(slozeni);
         }
 
+        /* Post method action which processes (EDITS) the Slozeni object given back by the
+         * submitted get method. In failure scenario it returns back the object and challenges
+         * the user to make some necessary changes */
         [HttpPost]
         public ActionResult Edit(Slozeni slozeni)
         {
@@ -65,6 +75,7 @@ namespace Cajovna.Controllers
             return View(slozeni);
         }
 
+        /* Get method action which returns a view to DELETE a Slozeni acordingly to the input id paremeter*/
         public ActionResult Delete(int id = 0)
         {
             Slozeni slozeni = db.Slozeni.Find(id);
@@ -72,6 +83,9 @@ namespace Cajovna.Controllers
             return View(slozeni);
         }
 
+        /* Post method action which processes (DELETES) the Slozeni object which the input id parameter was given back by the
+         * submitted get method defines. In failure scenario it returns back the object and challenges
+         * the user to make some necessary changes */
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
