@@ -1,0 +1,46 @@
+﻿@model Cajovna.Models.PolozkaUctu
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Stul")"><img src="~/Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš" /></a>
+    @Html.ActionLink("Admin", "Admin", "Home")
+    >>
+    @Html.ActionLink("Stoly", "Index", "Ucet")
+    >>
+    @Html.ActionLink("Stůl #" + (int)ViewBag.stulID, "Detail", "Stul", new { id = ViewBag.stulID }, null)
+    >>
+    @Html.ActionLink("Účet #" + (int)ViewBag.ucetID, "Detail", "Ucet", new { id = ViewBag.ucetID }, null)
+    >>
+    @Html.ActionLink("Objednat položku", "Add", "PolozkaUctu", new { id = ViewBag.ucetID }, null)
+</div>
+
+<h2>Objednat položku na účet</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    if (!String.IsNullOrEmpty(ViewBag.errors))
+    {
+        <p class="validation_error">@ViewBag.errors</p>
+    }
+
+    <input type="hidden" name="ucetID" value="@ViewBag.ucetID"/>
+    <label for="polozkaMenuID">Položka menu</label>
+    
+    <select name="polozkaMenuID">
+        @foreach (Cajovna.Models.PolozkaMenu polozkaMenu in ViewBag.polozkyMenu)
+        {
+            if (Model != null && polozkaMenu.polozkaMenuID == Model.polozkaMenuID)
+            {
+                <option value="@polozkaMenu.polozkaMenuID" selected>@polozkaMenu.name (@polozkaMenu.price_sell)</option>
+            }
+            else
+            {
+                <option value="@polozkaMenu.polozkaMenuID">@polozkaMenu.name (@polozkaMenu.price_sell)</option>
+            }
+        }
+    </select>
+    <br />
+    <input type="submit" value="Objednat" />
+
+}
