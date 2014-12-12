@@ -271,3 +271,9 @@ ul.ucty li{
     list-style: none;
     margin-left: 25px;
 }
+
+/* PAY*/
+.checkbox {
+    display: inline;
+    line-height: 1.6em;
+}

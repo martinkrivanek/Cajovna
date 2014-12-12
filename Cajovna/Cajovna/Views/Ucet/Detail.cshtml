@@ -10,6 +10,7 @@
     >>
     @Html.ActionLink("účet #" + Model.ucetID, "Detail", "Ucet", new { id = Model.ucetID }, null)
 </div>
+
 <h2>Účet #@Model.ucetID @(String.IsNullOrEmpty(Model.name) ? "" : " - " + Model.name)<small>(Účet #@Model.ucetID - @Html.ActionLink("Přejmenovat", "Edit", "Ucet", new { id = Model.ucetID }, null) - @Html.ActionLink("Přesunout", "Moveucet", "Ucet", new { id = Model.ucetID }, null) - @Html.ActionLink("Smazat", "Delete", "Ucet", new { id = Model.ucetID }, null))</small></h2>
 
 <table id="detail">
@@ -34,7 +35,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (Cajovna.Models.PolozkaUctu polozkaUctu in Model.polozkyUctu)
+            @foreach (Cajovna.Models.PolozkaUctu polozkaUctu in Model.polozkyUctu.Where(a => a.date_paid == null).ToList())
             {
                 <tr>
                     <td>@polozkaUctu.polozkaMenu.name</td>
@@ -45,4 +46,4 @@ else
         </tbody>
     </table>
 }
-<p><strong>@Html.ActionLink("ZAPLATIT", "Pay", "PolozkaUctu", new { id = Model.ucetID }, null)</strong></p>
+<p><strong>@Html.ActionLink("ZAPLATIT", "Pay", "Ucet", new { id = Model.ucetID }, null)</strong></p>
