@@ -8,12 +8,13 @@ namespace Cajovna.Controllers
 {
     public class HomeController : Controller
     {
+        /* url: localhost */
         public ActionResult Index()
         {
-            //return View();
             return RedirectToAction("Admin");
         }
 
+        /* url: localhost/Admin */
         public ActionResult Admin()
         {
             return View();

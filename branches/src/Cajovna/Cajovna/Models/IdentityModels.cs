@@ -18,6 +18,8 @@ namespace Cajovna.Models
         }
     }
 
+    /* Application DB context is a class which defines what sets (database tables) will
+     * be at programmer disposal*/
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Surovina> Suroviny { get; set; }
@@ -27,6 +29,8 @@ namespace Cajovna.Models
         public DbSet<PolozkaMenu> PolozkyMenu { get; set; }
         public DbSet<PolozkaUctu> PolozkyUctu { get; set; }
 
+        /* overrides the default empty method. When creating model structure we sometime 
+         * must define some mapping of models - usualy with many-2-one/many associations */
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
