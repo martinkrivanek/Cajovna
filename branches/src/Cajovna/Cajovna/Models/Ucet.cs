@@ -37,7 +37,7 @@ namespace Cajovna.Models
          * the customers would like to pay everything at once*/ 
         public double price_total(){
             double total = 0;
-            foreach (PolozkaUctu item in polozkyUctu)
+            foreach (PolozkaUctu item in polozkyUctu.Where(a => a.date_paid == null).ToList())
             {
                 total += item.price();
             }

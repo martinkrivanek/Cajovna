@@ -1,0 +1,31 @@
+﻿@model Cajovna.Models.Ucet
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Suroviny")"><img src="~/Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš" /></a>
+    @Html.ActionLink("Admin", "Admin", "Home")
+    >>
+    @Html.ActionLink("Stoly", "Index", "Stul")
+    >>
+    @Html.ActionLink("Stůl #" + Model.stulID, "Detail", "Stul", new { id = Model.stulID }, null)
+    >>
+    @Html.ActionLink("účet #" + Model.ucetID, "Detail", "Ucet", new { id = Model.ucetID }, null)
+    >>
+    @Html.ActionLink("Placení", "Pay", "Ucet", new { id = Model.ucetID }, null)
+</div>
+
+<h2>Placení položek účtu #@Model.ucetID @(String.IsNullOrEmpty(Model.name) ? "" : " - " + Model.name)</h2>
+
+<form action="/Ucet/Pay" method="post">    
+    <input type="hidden" name="ucetID" value="@Model.ucetID" />
+
+    @foreach (Cajovna.Models.PolozkaUctu pu in Model.polozkyUctu.Where(a=>a.date_paid == null).ToList())
+    {
+        <label class="checkbox">
+            <input type="checkbox" name="polozkyUctuIDs" value="@pu.polozkaUctuID" />
+            <strong>@pu.price() CZK ...... @pu.polozkaMenu.name</strong> (objednáno: @pu.date_ordered.ToString("dd\\/M\\/yyyy"))
+            
+        </label>
+        <br />
+    }
+    <input type="submit" value="Zaplatit" />
+</form>

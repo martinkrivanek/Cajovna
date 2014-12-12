@@ -36,5 +36,11 @@ namespace Cajovna.Models
         public double price(){
             return polozkaMenu.price_sell;
         }
+
+        /* marks the object as paid for, therefore the date paid is defined */
+        public void pay()
+        {
+            date_paid = DateTime.Now;
+        }
     }
 }

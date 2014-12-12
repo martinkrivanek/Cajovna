@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 
 using Cajovna.Models;
+using System.Text;
 
 namespace Cajovna.Controllers
 {
@@ -95,9 +96,10 @@ namespace Cajovna.Controllers
             return RedirectToAction("Detail", "Stul", new { id = ucet.stulID });
         }
 
-        public ActionResult MoveUcet(int id) // ucetID
+        public ActionResult MoveUcet(int id = 0) // ucetID
         {
             Ucet ucet = db.Ucty.Find(id);
+            if (ucet == null) return HttpNotFound();
             ViewBag.stoly = db.Stoly.OrderBy(a => a.name).ToList();
             return View(ucet);
         }
@@ -112,6 +114,31 @@ namespace Cajovna.Controllers
                 return RedirectToAction("Detail", "Stul", new { id = ucet.stulID });
             }
             return View(ucet);
+        }
+
+        public ActionResult Pay(int id = 0)
+        {
+            Ucet ucet = db.Ucty.Find(id);
+            if (ucet == null) return HttpNotFound();
+            return View(ucet);
+        }
+
+        [HttpPost]
+        public ActionResult Pay(int[] polozkyUctuIDs, int ucetID)
+        {
+            Ucet ucet = db.Ucty.Find(ucetID);
+            if (ucet == null) return HttpNotFound();
+
+            foreach (int id in polozkyUctuIDs)
+            {
+                PolozkaUctu pu = db.PolozkyUctu.Find(id);
+                pu.pay();
+                db.Entry(pu).State = EntityState.Modified;
+            }            
+            db.SaveChanges();
+
+            return RedirectToAction("Detail", "Ucet", new { id = ucetID });
+
         }
 
         // HELPERs

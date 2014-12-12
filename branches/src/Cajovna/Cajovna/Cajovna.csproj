@@ -279,6 +279,7 @@
     <Content Include="Views\Ucet\Edit.cshtml" />
     <Content Include="Views\Ucet\Index.cshtml" />
     <Content Include="Views\Ucet\MoveUcet.cshtml" />
+    <Content Include="Views\Ucet\Pay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
