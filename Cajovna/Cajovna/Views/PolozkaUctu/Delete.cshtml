@@ -1,0 +1,41 @@
+﻿@model Cajovna.Models.PolozkaUctu
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Stul")"><img src="~/Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš" /></a>
+    @Html.ActionLink("Admin", "Admin", "Home")
+    >>
+    @Html.ActionLink("Stoly", "Index", "Ucet")
+    >>
+    @Html.ActionLink("Stůl #" + (int)ViewBag.stulID, "Detail", "Stul", new { id = ViewBag.stulID }, null)
+    >>
+    @Html.ActionLink("Účet #" + Model.ucetID, "Detail", "Ucet", new { id = Model.ucetID }, null)
+    >>
+    @Html.ActionLink("Odepsat položku", "Delete", "PolozkaUctu", new { id = Model.polozkaUctuID }, null)
+</div>
+
+<h2>Odepsat položku z účtu</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    if (!String.IsNullOrEmpty(ViewBag.errors))
+    {
+        <p class="validation_error">@ViewBag.errors</p>
+    }
+
+    <input type="hidden" name="ucetID" value="@ViewBag.ucetID" />
+
+    <label>Účet</label>
+    <input type="text" value="#@Model.ucetID @Model.ucet.name" disabled/>
+    <br />
+    <label for="polozkaMenuID">Položka menu</label>
+    <select name="polozkaMenuID" disabled>
+        <option value="@Model.polozkaMenuID">@Model.polozkaMenu.name (@Model.polozkaMenu.price_sell)</option>
+    </select>
+    
+    
+    <br />
+    <input type="submit" value="Odepsat" />
+
+}

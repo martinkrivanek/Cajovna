@@ -1,0 +1,48 @@
+﻿@model Cajovna.Models.Ucet
+
+<div id="breadcrumbs">
+    <a href="@Url.Action("Index", "Suroviny")"><img src="~/Content/Images/arrow_back.png" height="20" width="20" alt="o úroveň výš" /></a>
+    @Html.ActionLink("Admin", "Admin", "Home")
+    >>
+    @Html.ActionLink("Stoly", "Index", "Stul")
+    >>
+    @Html.ActionLink("Stůl #" + Model.stulID, "Detail", "Stul", new { id = Model.stulID }, null)
+    >>
+    @Html.ActionLink("účet #" + Model.ucetID, "Detail", "Ucet", new { id = Model.ucetID }, null)
+</div>
+<h2>Účet #@Model.ucetID @(String.IsNullOrEmpty(Model.name) ? "" : " - " + Model.name)<small>(Účet #@Model.ucetID - @Html.ActionLink("Přejmenovat", "Edit", "Ucet", new { id = Model.ucetID }, null) - @Html.ActionLink("Přesunout", "Moveucet", "Ucet", new { id = Model.ucetID }, null) - @Html.ActionLink("Smazat", "Delete", "Ucet", new { id = Model.ucetID }, null))</small></h2>
+
+<table id="detail">
+    <tr>
+        <th>Datum&nbsp;přidání:</th>
+        <td>@Model.date_added.ToString("dd\\/M\\/yyyy")</td>
+    </tr>
+</table>
+<h3>Položky:<small>@Html.ActionLink("+ Přidat nový záznam", "Add", "PolozkaUctu", new { id = Model.ucetID }, null)</small></h3>
+@if (Model.polozkyUctu.Count == 0)
+{
+    <p class="count_0">Na účtu není zatím žádná položka</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Název</th>
+                <th>Datum objednání</th>
+                <th>Celková cena: @Model.price_total() CZK</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Cajovna.Models.PolozkaUctu polozkaUctu in Model.polozkyUctu)
+            {
+                <tr>
+                    <td>@polozkaUctu.polozkaMenu.name</td>
+                    <td>@polozkaUctu.date_ordered.ToString("dd\\/M\\/yyyy")</td>
+                    <td>@Html.ActionLink("Odepsání", "Delete", "PolozkaUctu", new { id = polozkaUctu.polozkaUctuID }, null)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<p><strong>@Html.ActionLink("ZAPLATIT", "Pay", "PolozkaUctu", new { id = Model.ucetID }, null)</strong></p>

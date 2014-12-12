@@ -9,7 +9,9 @@
     @Html.ActionLink("Stůl #" + Model.stulID, "Detail", "Stul", new { id = Model.stulID }, null)
 </div>
 
-<h2>Stůl #@Model.stulID @(String.IsNullOrEmpty(Model.name) ? "" : " - " + Model.name)<small>(Stůl #@Model.stulID - @Html.ActionLink("Editovat", "Edit", "Stul", new { id = Model.stulID }, null) - @Html.ActionLink("Smazat", "Delete", "Stul", new { id = Model.stulID }, null))</small></h2>
+<h2>Stůl #@Model.stulID @(String.IsNullOrEmpty(Model.name) ? "" : " - " + Model.name)<small>(Stůl #@Model.stulID - @Html.ActionLink("Přejmenovat", "Edit", "Stul", new { id = Model.stulID }, null) - @Html.ActionLink("Smazat", "Delete", "Stul", new { id = Model.stulID }, null))</small></h2>
+
+<p>@Html.ActionLink("+ Založit nový účet", "Add", "Ucet", new { id = Model.stulID }, null)</p>
 
 @{List<Cajovna.Models.Ucet> ucty = Model.ucty.Where(a => a.date_closed == null).ToList(); }
 

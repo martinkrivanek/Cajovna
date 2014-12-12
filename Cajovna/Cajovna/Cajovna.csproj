@@ -161,11 +161,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PolozkaUctuController.cs" />
     <Compile Include="Controllers\PolozkyMenuController.cs" />
     <Compile Include="Controllers\SlozeniController.cs" />
     <Compile Include="Controllers\StulController.cs" />
     <Compile Include="Controllers\SurovinyController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\TestController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\UcetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -267,6 +271,14 @@
     <Content Include="Views\Stul\Detail.cshtml" />
     <Content Include="Views\Stul\Edit.cshtml" />
     <Content Include="Views\Stul\Index.cshtml" />
+    <Content Include="Views\PolozkaUctu\Add.cshtml" />
+    <Content Include="Views\PolozkaUctu\Delete.cshtml" />
+    <Content Include="Views\Ucet\Add.cshtml" />
+    <Content Include="Views\Ucet\Delete.cshtml" />
+    <Content Include="Views\Ucet\Detail.cshtml" />
+    <Content Include="Views\Ucet\Edit.cshtml" />
+    <Content Include="Views\Ucet\Index.cshtml" />
+    <Content Include="Views\Ucet\MoveUcet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
