@@ -107,7 +107,8 @@ namespace Cajovna.Controllers
                 ViewBag.errors = "Neleze smazat účet, na kterém jsou nezaplacené položky.";
                 return View(ucet);
             }
-
+            ucet.date_closed = DateTime.Now;
+            db.Entry(ucet).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Detail", "Stul", new { id = ucet.stulID });
         }
