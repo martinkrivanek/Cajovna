@@ -1,4 +1,5 @@
-﻿using Cajovna.Models;
+﻿using Cajovna.DAO;
+using Cajovna.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,14 +12,15 @@ namespace Cajovna.Controllers
     /* Controller servicing actions of PolozkaMenu entity */
     public class PolozkyMenuController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private PolozkyMenuDAO polMenuDAO = new PolozkyMenuDAOImpl();
+
         const int items_on_page = 2;
 
         /* Action which returns a view to show LIST of PolozkaMenu objects in order defined 
          * by the input parameter sort with proper paging defined by the input parameter page */
         public ActionResult Index(String sort, int page = 1)
         {
-            ViewBag.totalItems = db.PolozkyMenu.Count();
+            ViewBag.totalItems = polMenuDAO.readAll().Count();
             ViewBag.maxPage = (ViewBag.totalItems % items_on_page == 0) ? ViewBag.totalItems / items_on_page : ViewBag.totalItems / items_on_page + 1;
             ViewBag.page = page;
             ViewBag.sort = (String.IsNullOrWhiteSpace(sort)) ? "none" : sort;
@@ -29,7 +31,7 @@ namespace Cajovna.Controllers
         /* Action which returns a view to show DETAIL of PolozkaMenu object defined by the input parameter id */
         public ActionResult Detail(int id = 0)
         {
-            PolozkaMenu polozkaMenu = db.PolozkyMenu.Find(id);
+            PolozkaMenu polozkaMenu = polMenuDAO.read(id);
             if (polozkaMenu == null) return HttpNotFound();
             return View(polozkaMenu);
         }
@@ -48,8 +50,7 @@ namespace Cajovna.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.PolozkyMenu.Add(polozkaMenu);
-                db.SaveChanges();
+                polMenuDAO.create(polozkaMenu);
                 return RedirectToAction("Index", "PolozkyMenu");
             }
             return View(polozkaMenu);
@@ -58,7 +59,7 @@ namespace Cajovna.Controllers
         /* Get method action which returns a view to EDIT a PolozkaMenu acordingly to the input id paremeter*/
         public ActionResult Edit(int id = 0)
         {
-            PolozkaMenu polozkaMenu = db.PolozkyMenu.Find(id);
+            PolozkaMenu polozkaMenu = polMenuDAO.read(id);
             if (polozkaMenu == null) return HttpNotFound();
             ViewBag.price_buy = polozkaMenu.price_buy();
             return View(polozkaMenu);
@@ -72,8 +73,7 @@ namespace Cajovna.Controllers
         {
             if (ModelState.IsValid && myPolozkaMenuValidation(polozkaMenu, price_buy))
             {
-                db.Entry(polozkaMenu).State = EntityState.Modified;
-                db.SaveChanges();
+                polMenuDAO.update(polozkaMenu);
                 return RedirectToAction("Index", "PolozkyMenu");
             }
             ViewBag.price_buy = price_buy;
@@ -84,7 +84,7 @@ namespace Cajovna.Controllers
         /* Get method action which returns a view to DELETE a PolozkaMenu acordingly to the input id paremeter*/
         public ActionResult Delete(int id = 0)
         {
-            PolozkaMenu polozkaMenu = db.PolozkyMenu.Find(id);
+            PolozkaMenu polozkaMenu = polMenuDAO.read(id);
             if (polozkaMenu == null) return HttpNotFound();
             return View(polozkaMenu);
         }
@@ -95,9 +95,8 @@ namespace Cajovna.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            PolozkaMenu polozkaMenu = db.PolozkyMenu.Find(id);
-            db.PolozkyMenu.Remove(polozkaMenu);
-            db.SaveChanges();
+            PolozkaMenu polozkaMenu = polMenuDAO.read(id);
+            polMenuDAO.delete(polozkaMenu);
             return RedirectToAction("Index", "PolozkyMenu");
         }
 
@@ -119,7 +118,7 @@ namespace Cajovna.Controllers
         /* returns list of PolozkaMenu objects with paging and sorted accordingly */
         private List<PolozkaMenu> getPolozkyMenu(int page, String sort)
         {
-            List<PolozkaMenu> polozkyMenu = db.PolozkyMenu.ToList();
+            List<PolozkaMenu> polozkyMenu = polMenuDAO.readAll();
             switch (sort)
             {
                 case "a-z": polozkyMenu = polozkyMenu.OrderBy(a => a.name).ToList(); break;

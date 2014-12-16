@@ -1,1 +1,2 @@
 C:\Users\Vojtěch\Desktop\usi_SVN_cajovna\branches\src\Cajovna\Cajovna.Tests\obj\Debug\Cajovna.Tests.csprojResolveAssemblyReference.cache
+C:\Users\HP\Desktop\SVN-cajovna\branches\src\Cajovna\Cajovna.Tests\obj\Debug\Cajovna.Tests.csprojResolveAssemblyReference.cache

@@ -1,4 +1,5 @@
-﻿using Cajovna.Models;
+﻿using Cajovna.DAO;
+using Cajovna.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,18 @@ namespace Cajovna.Controllers
     /* Controller servicing actions of PolozkaUctu entity */
     public class PolozkaUctuController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private PolozkaUctuDAO polUctuDAO = new PolozkaUctuDAOImpl();
+        private UcetDAO ucetDAO = new UcetDAOImpl();
+        private PolozkyMenuDAO polMenuDAO = new PolozkyMenuDAOImpl();
 
         /* Get method action which returns a view to CREATE a PolozkaUctu within an Ucet 
          * defined by input id parameter */
         public ActionResult Add(int id = 0) //id ucet
         {
-            Ucet ucet = db.Ucty.Find(id);
+            Ucet ucet = ucetDAO.read(id);
             if (ucet == null) return HttpNotFound();
             ViewBag.ucetID = id;
-            ViewBag.polozkyMenu = db.PolozkyMenu.Where(b => b.avalible).OrderBy(a => a.name).ToList();
+            ViewBag.polozkyMenu = polMenuDAO.readAll().Where(b => b.avalible).OrderBy(a => a.name).ToList();
             ViewBag.stulID = ucet.stulID;
             return View();
         }
@@ -32,14 +35,13 @@ namespace Cajovna.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.PolozkyUctu.Add(polozkaUctu);
-                db.SaveChanges();
+                polUctuDAO.create(polozkaUctu);
                 return RedirectToAction("Detail", "Ucet", new { id = polozkaUctu.ucetID });
             }
             ViewBag.errors = "error";
             ViewBag.ucetID = polozkaUctu.ucetID;
-            ViewBag.stulID = db.Ucty.Find(polozkaUctu.ucetID).stulID;
-            ViewBag.polozkyMenu = db.PolozkyMenu.Where(b => b.avalible).OrderBy(a => a.name).ToList();
+            ViewBag.stulID = ucetDAO.read(polozkaUctu.ucetID).stulID;
+            ViewBag.polozkyMenu = polMenuDAO.readAll().Where(b => b.avalible).OrderBy(a => a.name).ToList();
             return View(polozkaUctu);
         }
 
@@ -47,7 +49,7 @@ namespace Cajovna.Controllers
          * defined by input id parameter */
         public ActionResult Delete(int id = 0) //id polozkaUctu
         {
-            PolozkaUctu polozkaUctu = db.PolozkyUctu.Find(id);
+            PolozkaUctu polozkaUctu = polUctuDAO.read(id);
             if (polozkaUctu == null) return HttpNotFound();
             ViewBag.stulID = polozkaUctu.ucet.stulID;
             return View(polozkaUctu);
@@ -59,9 +61,8 @@ namespace Cajovna.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            PolozkaUctu polozkaUctu = db.PolozkyUctu.Find(id);
-            db.PolozkyUctu.Remove(polozkaUctu);
-            db.SaveChanges();
+            PolozkaUctu polozkaUctu = polUctuDAO.read(id);
+            polUctuDAO.delete(polozkaUctu);
             return RedirectToAction("Detail", "Ucet", new { id = polozkaUctu.ucetID });
         }
     }

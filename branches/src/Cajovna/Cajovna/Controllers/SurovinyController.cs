@@ -1,4 +1,5 @@
-﻿using Cajovna.Models;
+﻿using Cajovna.DAO;
+using Cajovna.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,14 +13,15 @@ namespace Cajovna.Controllers
     /* Controller servicing actions of Surovina entity */
     public class SurovinyController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private SurovinyDAO surovinyDAO = new SurovinyDAOImpl();
+
         const int items_on_page = 3;
 
         /* Action which returns a view to show LIST of Surovina objects in order defined 
          * by the input parameter sort with proper paging defined by the input parameter page */
         public ActionResult Index(String sort, int page = 1)
-        {            
-            ViewBag.totalItems = db.Suroviny.Count();
+        {
+            ViewBag.totalItems = surovinyDAO.readAll().Count();
             ViewBag.maxPage = (ViewBag.totalItems % items_on_page == 0) ? ViewBag.totalItems / items_on_page : ViewBag.totalItems / items_on_page + 1;
             ViewBag.page = page;
             ViewBag.sort = (String.IsNullOrWhiteSpace(sort)) ? "none" : sort;
@@ -30,7 +32,7 @@ namespace Cajovna.Controllers
         /* Action which returns a view to show DETAIL of Surovina object defined by the input parameter id */
         public ActionResult Detail(int id = 0)
         {
-            Surovina surovina = db.Suroviny.Find(id);
+            Surovina surovina = surovinyDAO.read(id);
             if (surovina == null) return HttpNotFound();
             return View(surovina);
         }
@@ -49,8 +51,7 @@ namespace Cajovna.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Suroviny.Add(surovina);
-                db.SaveChanges();
+                surovinyDAO.create(surovina);
                 return RedirectToAction("Index", "Suroviny");
             }
             return View(surovina);
@@ -59,7 +60,7 @@ namespace Cajovna.Controllers
         /* Get method action which returns a view to EDIT a Surovina acordingly to the input id paremeter*/
         public ActionResult Edit(int id = 0)
         {
-            Surovina surovina = db.Suroviny.Find(id);
+            Surovina surovina = surovinyDAO.read(id);
             if (surovina == null) return HttpNotFound();
             return View(surovina);
         }
@@ -72,8 +73,7 @@ namespace Cajovna.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(surovina).State = EntityState.Modified;
-                db.SaveChanges();
+                surovinyDAO.update(surovina);
                 return RedirectToAction("Index", "Suroviny");
             }
             return View(surovina);
@@ -82,7 +82,7 @@ namespace Cajovna.Controllers
         /* Get method action which returns a view to DELETE a Surovina acordingly to the input id paremeter*/
         public ActionResult Delete(int id = 0)
         {
-            Surovina surovina = db.Suroviny.Find(id);
+            Surovina surovina = surovinyDAO.read(id);
             if (surovina == null) return HttpNotFound();
             return View(surovina);
         }
@@ -93,9 +93,8 @@ namespace Cajovna.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Surovina surovina = db.Suroviny.Find(id);
-            db.Suroviny.Remove(surovina);
-            db.SaveChanges();
+            Surovina surovina = surovinyDAO.read(id);
+            surovinyDAO.delete(surovina);
             return RedirectToAction("Index", "Suroviny");
         }
 
@@ -117,7 +116,7 @@ namespace Cajovna.Controllers
         /* returns list of PolozkaMenu objects with paging and sorted accordingly */
         private List<Surovina> getSuroviny(int page, String sort)
         {
-            List<Surovina> suroviny = db.Suroviny.ToList();
+            List<Surovina> suroviny = surovinyDAO.readAll();
             switch (sort)
             {
                 case "a-z": suroviny = suroviny.OrderBy(a => a.name).ToList(); break;
