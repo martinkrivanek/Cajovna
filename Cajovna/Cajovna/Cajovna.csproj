@@ -167,6 +167,18 @@
     <Compile Include="Controllers\StulController.cs" />
     <Compile Include="Controllers\SurovinyController.cs" />
     <Compile Include="Controllers\UcetController.cs" />
+    <Compile Include="DAO\DAOImpl\PolozkaUctuDAOImpl.cs" />
+    <Compile Include="DAO\DAOImpl\PolozkyMenuDAOImpl.cs" />
+    <Compile Include="DAO\DAOImpl\SlozeniDAOImpl.cs" />
+    <Compile Include="DAO\DAOImpl\StulDAOImpl.cs" />
+    <Compile Include="DAO\DAOImpl\SurovinyDAOImpl.cs" />
+    <Compile Include="DAO\DAOImpl\UcetDAOImpl.cs" />
+    <Compile Include="DAO\PolozkaUctuDAO.cs" />
+    <Compile Include="DAO\PolozkyMenuDAO.cs" />
+    <Compile Include="DAO\SlozeniDAO.cs" />
+    <Compile Include="DAO\StulDAO.cs" />
+    <Compile Include="DAO\SurovinyDAO.cs" />
+    <Compile Include="DAO\UcetDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -280,6 +292,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Services\ServiceImpl\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

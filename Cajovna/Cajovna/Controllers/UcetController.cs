@@ -7,21 +7,24 @@ using System.Data.Entity;
 
 using Cajovna.Models;
 using System.Text;
+using Cajovna.DAO;
 
 namespace Cajovna.Controllers
 {
     /* Controller servicing actions of Ucet entity */
     public class UcetController : Controller
     {
+        private UcetDAO ucetDAO = new UcetDAOImpl();
+        private StulDAO stulDAO = new StulDAOImpl();
+        private PolozkaUctuDAO polUctuDAO = new PolozkaUctuDAOImpl();
 
-        private ApplicationDbContext db = new ApplicationDbContext();
         const int items_on_page = 10;
 
         /* Action which returns a view to show LIST of Ucet objects in order defined 
          * by the input parameter sort with proper paging defined by the input parameter page */
         public ActionResult Index(String sort, int page = 1)
         {
-            ViewBag.totalItems = db.Ucty.Count();
+            ViewBag.totalItems = ucetDAO.readAll().Count();
             ViewBag.maxPage = (ViewBag.totalItems % items_on_page == 0) ? ViewBag.totalItems / items_on_page : ViewBag.totalItems / items_on_page + 1;
             ViewBag.page = page;
             ViewBag.sort = (String.IsNullOrWhiteSpace(sort)) ? "none" : sort;
@@ -32,7 +35,7 @@ namespace Cajovna.Controllers
         /* Action which returns a view to show DETAIL of Ucet object defined by the input parameter id */
         public ActionResult Detail(int id = 0)
         {
-            Ucet ucet = db.Ucty.Find(id);
+            Ucet ucet = ucetDAO.read(id);
             if (ucet == null) return HttpNotFound();
             return View(ucet);
         }
@@ -40,7 +43,7 @@ namespace Cajovna.Controllers
         /* Get method action which returns a view to CREATE a Ucet to the Stul defined by the input id parameter*/
         public ActionResult Add(int id = 0)
         {
-            if (db.Stoly.Find(id) == null)
+            if (stulDAO.read(id) == null)
             {
                 return HttpNotFound();
             }
@@ -56,8 +59,7 @@ namespace Cajovna.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Ucty.Add(ucet);
-                db.SaveChanges();
+                ucetDAO.create(ucet);
                 return RedirectToAction("Detail", "Stul", new { id = ucet.stulID });
             }
             ViewBag.stulID = ucet.stulID;
@@ -67,7 +69,7 @@ namespace Cajovna.Controllers
         /* Get method action which returns a view to EDIT a Ucet acordingly to the input id paremeter*/
         public ActionResult Edit(int id = 0)
         {
-            Ucet ucet = db.Ucty.Find(id);
+            Ucet ucet = ucetDAO.read(id);
             if (ucet == null) return HttpNotFound();
             return View(ucet);
         }
@@ -80,8 +82,7 @@ namespace Cajovna.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(ucet).State = EntityState.Modified;
-                db.SaveChanges();
+                ucetDAO.update(ucet);
                 return RedirectToAction("Detail", "Stul", new { id = ucet.stulID });
             }
             return View(ucet);
@@ -90,7 +91,7 @@ namespace Cajovna.Controllers
         /* Get method action which returns a view to DELETE a Ucet acordingly to the input id paremeter*/
         public ActionResult Delete(int id = 0)
         {
-            Ucet ucet = db.Ucty.Find(id);
+            Ucet ucet = ucetDAO.read(id);
             if (ucet == null) return HttpNotFound();
             return View(ucet);
         }
@@ -101,24 +102,23 @@ namespace Cajovna.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Ucet ucet = db.Ucty.Find(id);
+            Ucet ucet = ucetDAO.read(id);
             if (ucet.polozkyUctu.Where(a => a.date_paid == null).Count() != 0)
             {
                 ViewBag.errors = "Neleze smazat účet, na kterém jsou nezaplacené položky.";
                 return View(ucet);
             }
             ucet.date_closed = DateTime.Now;
-            db.Entry(ucet).State = EntityState.Modified;
-            db.SaveChanges();
+            ucetDAO.update(ucet);
             return RedirectToAction("Detail", "Stul", new { id = ucet.stulID });
         }
 
         /* Get method action which returns a view to MOVE a Ucet defined by the input id parameter to a different Stul */
         public ActionResult MoveUcet(int id = 0) // ucetID
         {
-            Ucet ucet = db.Ucty.Find(id);
+            Ucet ucet = ucetDAO.read(id);
             if (ucet == null) return HttpNotFound();
-            ViewBag.stoly = db.Stoly.OrderBy(a => a.name).ToList();
+            ViewBag.stoly = stulDAO.readAll().OrderBy(a => a.name).ToList();
             return View(ucet);
         }
 
@@ -130,8 +130,7 @@ namespace Cajovna.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(ucet).State = EntityState.Modified;
-                db.SaveChanges();
+                ucetDAO.update(ucet);
                 return RedirectToAction("Detail", "Stul", new { id = ucet.stulID });
             }
             return View(ucet);
@@ -140,7 +139,7 @@ namespace Cajovna.Controllers
         /* Get method action which returns a view to PAY some PolozkaUcet objects of an Ucet defined by the input id parameter*/
         public ActionResult Pay(int id = 0)
         {
-            Ucet ucet = db.Ucty.Find(id);
+            Ucet ucet = ucetDAO.read(id);
             if (ucet == null) return HttpNotFound();
             return View(ucet);
         }
@@ -151,17 +150,14 @@ namespace Cajovna.Controllers
         [HttpPost]
         public ActionResult Pay(int[] polozkyUctuIDs, int ucetID)
         {
-            Ucet ucet = db.Ucty.Find(ucetID);
+            Ucet ucet = ucetDAO.read(ucetID);
             if (ucet == null) return HttpNotFound();
-
             foreach (int id in polozkyUctuIDs)
             {
-                PolozkaUctu pu = db.PolozkyUctu.Find(id);
+                PolozkaUctu pu = polUctuDAO.read(id);
                 pu.pay();
-                db.Entry(pu).State = EntityState.Modified;
-            }            
-            db.SaveChanges();
-
+                polUctuDAO.update(pu);
+            }
             return RedirectToAction("Detail", "Ucet", new { id = ucetID });
 
         }
@@ -181,7 +177,7 @@ namespace Cajovna.Controllers
         /* returns list of PolozkaMenu objects with paging and sorted accordingly */
         private List<Ucet> getUcty(int page, String sort)
         {
-            List<Ucet> ucty = db.Ucty.ToList();
+            List<Ucet> ucty = ucetDAO.readAll();
             switch (sort)
             {
                 case "a-z": ucty = ucty.OrderBy(a => a.name).ToList(); break;

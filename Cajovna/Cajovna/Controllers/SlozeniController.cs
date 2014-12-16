@@ -1,4 +1,5 @@
-﻿using Cajovna.Models;
+﻿using Cajovna.DAO;
+using Cajovna.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,14 +12,15 @@ namespace Cajovna.Controllers
     /* Controller servicing actions of Slozeni entity */
     public class SlozeniController : Controller
     {
-
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private SlozeniDAO slozeniDAO = new SlozeniDAOImpl();
+        private PolozkyMenuDAO polMenuDAO = new PolozkyMenuDAOImpl();
+        private SurovinyDAO surovinyDAO = new SurovinyDAOImpl();
 
         /* Get method action which returns a view to CREATE a Slozeni of an PolozkaMenu 
          * object defined by the input ID parameter */
         public ActionResult Add(int id = 0) // = ID polozkyMenu
         {
-            PolozkaMenu polozkaMenu = db.PolozkyMenu.Find(id);
+            PolozkaMenu polozkaMenu = polMenuDAO.read(id);
             if (polozkaMenu == null) return HttpNotFound();
             ViewBag.polozkaMenuID = id;
             ViewBag.suroviny = getListAddableMaterials(id);
@@ -33,11 +35,10 @@ namespace Cajovna.Controllers
         {
             if (ModelState.IsValid && slozeni.quantity > 0)
             {
-                db.Slozeni.Add(slozeni);
-                PolozkaMenu polozkaMenu = db.PolozkyMenu.Find(slozeni.polozkaMenuID);
+                slozeniDAO.create(slozeni);
+                PolozkaMenu polozkaMenu = polMenuDAO.read(slozeni.polozkaMenuID);
                 polozkaMenu.avalible = false;
-                db.Entry(polozkaMenu).State = EntityState.Modified;
-                db.SaveChanges();
+                polMenuDAO.update(polozkaMenu);
                 return RedirectToAction("Detail", "PolozkyMenu", new { id = slozeni.polozkaMenuID });
             }
             ViewBag.polozkaMenuID = slozeni.polozkaMenuID;
@@ -49,7 +50,7 @@ namespace Cajovna.Controllers
         /* Get method action which returns a view to EDIT a Slozeni acordingly to the input id paremeter*/
         public ActionResult Edit(int id = 0)
         {
-            Slozeni slozeni = db.Slozeni.Find(id);
+            Slozeni slozeni = slozeniDAO.read(id);
             if (slozeni == null) return HttpNotFound();
             ViewBag.suroviny = getListEditableMaterials(slozeni.polozkaMenuID, slozeni.surovinaID);
             return View(slozeni);
@@ -63,11 +64,10 @@ namespace Cajovna.Controllers
         {
             if (ModelState.IsValid & slozeni.quantity > 0)
             {
-                db.Entry(slozeni).State = EntityState.Modified;
-                PolozkaMenu polozkaMenu = db.PolozkyMenu.Find(slozeni.polozkaMenuID);
+                slozeniDAO.update(slozeni);
+                PolozkaMenu polozkaMenu = polMenuDAO.read(slozeni.polozkaMenuID);
                 polozkaMenu.avalible = false;
-                db.Entry(polozkaMenu).State = EntityState.Modified;
-                db.SaveChanges();
+                polMenuDAO.update(polozkaMenu);
                 return RedirectToAction("Detail", "PolozkyMenu", new { id = slozeni.polozkaMenuID });
             }
             ViewBag.errors = "Množství musí být větší než 0";
@@ -78,7 +78,7 @@ namespace Cajovna.Controllers
         /* Get method action which returns a view to DELETE a Slozeni acordingly to the input id paremeter*/
         public ActionResult Delete(int id = 0)
         {
-            Slozeni slozeni = db.Slozeni.Find(id);
+            Slozeni slozeni = slozeniDAO.read(id);
             if (slozeni == null) return HttpNotFound();
             return View(slozeni);
         }
@@ -89,9 +89,8 @@ namespace Cajovna.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Slozeni slozeni = db.Slozeni.Find(id);
-            db.Slozeni.Remove(slozeni);
-            db.SaveChanges();
+            Slozeni slozeni = slozeniDAO.read(id);
+            slozeniDAO.delete(slozeni);
             return RedirectToAction("Detail", "PolozkyMenu", new { id = slozeni.polozkaMenuID });
         }
 
@@ -101,8 +100,8 @@ namespace Cajovna.Controllers
          * entity because the duplicities there are forbidden */
         private List<Surovina> getListAddableMaterials(int pmID)
         {
-            List<Surovina> result = db.Suroviny.OrderBy(a => a.name).ToList();
-            foreach (Slozeni sl in db.PolozkyMenu.Find(pmID).recipe)
+            List<Surovina> result = surovinyDAO.readAll().OrderBy(a => a.name).ToList();
+            foreach (Slozeni sl in polMenuDAO.read(pmID).recipe)
             {
                 result.Remove(sl.surovina);
             }
@@ -114,7 +113,7 @@ namespace Cajovna.Controllers
         private List<Surovina> getListEditableMaterials(int pmID, int surID)
         {
             List<Surovina> result = getListAddableMaterials(pmID);
-            result.Add(db.Suroviny.Find(surID));
+            result.Add(surovinyDAO.read(surID));
             return result;
         }
     }
