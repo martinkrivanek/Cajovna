@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Cajovna.DAO
 {
-    public class StulDAOImpl : StulDAO
+    public sealed class StulDAOImpl : StulDAO, IDisposable
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -43,6 +43,10 @@ namespace Cajovna.DAO
         public List<Stul> readAll()
         {
             return db.Stoly.ToList();
+        }
+        public void Dispose()
+        {
+            db.Dispose();
         }
 
     }

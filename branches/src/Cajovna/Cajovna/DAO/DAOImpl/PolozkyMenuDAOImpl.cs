@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Cajovna.DAO
 {
-    public class PolozkyMenuDAOImpl : PolozkyMenuDAO
+    public sealed class PolozkyMenuDAOImpl : PolozkyMenuDAO, IDisposable
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -42,6 +42,11 @@ namespace Cajovna.DAO
         public List<PolozkaMenu> readAll()
         {
             return db.PolozkyMenu.ToList();
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
 
     }

@@ -28,7 +28,7 @@ namespace Cajovna.Models
         public Ucet()
         {
             date_added = DateTime.Now;
-            polozkyUctu = new List<PolozkaUctu>();
+            //polozkyUctu = new List<PolozkaUctu>();
         }
 
 

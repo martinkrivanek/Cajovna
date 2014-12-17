@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Cajovna.DAO
 {
-    public class SlozeniDAOImpl : SlozeniDAO
+    public sealed class SlozeniDAOImpl : SlozeniDAO, IDisposable
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -44,5 +44,10 @@ namespace Cajovna.DAO
             return db.Slozeni.ToList();
         }
 
+
+        public void Dispose()
+        {
+            db.Dispose();
+        }
     }
 }

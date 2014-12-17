@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Cajovna.DAO
 {
-    public class PolozkaUctuDAOImpl : PolozkaUctuDAO
+    public sealed class PolozkaUctuDAOImpl : PolozkaUctuDAO, IDisposable
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -43,6 +43,11 @@ namespace Cajovna.DAO
         public List<PolozkaUctu> readAll()
         {
             return db.PolozkyUctu.ToList();
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();            
         }
 
     }

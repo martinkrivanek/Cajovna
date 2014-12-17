@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Cajovna.DAO
 {
-    public class UcetDAOImpl : UcetDAO
+    public sealed class UcetDAOImpl : UcetDAO, IDisposable
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -42,6 +42,11 @@ namespace Cajovna.DAO
         public List<Ucet> readAll()
         {
             return db.Ucty.ToList();
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
 
     }
