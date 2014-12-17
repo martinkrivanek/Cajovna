@@ -29,7 +29,7 @@ namespace Cajovna.Models
         // CONSTRUCTORs
         public PolozkaMenu()
         {
-            recipe = new List<Slozeni>();
+            //recipe = new List<Slozeni>();
             avalible = false;
             date_added = DateTime.Now;
         }

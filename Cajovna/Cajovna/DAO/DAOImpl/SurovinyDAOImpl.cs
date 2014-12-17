@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Cajovna.DAO
 {
-    public class SurovinyDAOImpl : SurovinyDAO
+    public sealed class SurovinyDAOImpl : SurovinyDAO, IDisposable
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -45,5 +45,10 @@ namespace Cajovna.DAO
             return db.Suroviny.ToList();
         }
 
+
+        public void Dispose()
+        {
+            db.Dispose();
+        }
     }
 }
