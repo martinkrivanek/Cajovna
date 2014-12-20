@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Cajovna.DAO
 {
-    interface SlozeniDAO
+    public interface SlozeniDAO
     {
         void create(Slozeni slozeni);
         Slozeni read(int id);

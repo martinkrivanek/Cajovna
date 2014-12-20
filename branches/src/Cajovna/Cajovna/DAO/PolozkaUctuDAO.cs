@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Cajovna.DAO
 {
-    interface PolozkaUctuDAO
+    public interface PolozkaUctuDAO
     {
         void create(PolozkaUctu polozkaUctu);
         PolozkaUctu read(int id);

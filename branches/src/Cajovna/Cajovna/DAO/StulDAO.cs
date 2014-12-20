@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Cajovna.DAO
 {
-    interface StulDAO
+    public interface StulDAO
     {
         void create(Stul stul);
         Stul read(int id);

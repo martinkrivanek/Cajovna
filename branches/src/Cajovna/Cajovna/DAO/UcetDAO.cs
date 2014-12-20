@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Cajovna.DAO
 {
-    interface UcetDAO
+    public interface UcetDAO
     {
         void create(Ucet ucet);
         Ucet read(int id);

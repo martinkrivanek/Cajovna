@@ -33,6 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -82,11 +89,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\StulControllerTest.cs" />
+    <Compile Include="Controllers\SurovinyControllerTest.cs" />
+    <Compile Include="Controllers\PolozkaMenuControllerTest.cs" />
+    <Compile Include="Controllers\SlozeniControllerTest.cs" />
+    <Compile Include="Controllers\UcetControllerTest.cs" />
+    <Compile Include="Controllers\PolozkaUctuControllerTest.cs" />
+    <Compile Include="DAO\PolozkaUctuDAOTest.cs" />
+    <Compile Include="DAO\StulDAOTest.cs" />
+    <Compile Include="DAO\SurovinyDAOTest.cs" />
+    <Compile Include="DAO\PolozkaMenuDAOTest.cs" />
+    <Compile Include="DAO\SlozeniDAOTest.cs" />
+    <Compile Include="DAO\UcetDAOTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App.config" />
+    <Content Include="App.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -97,6 +118,7 @@
       <Name>Cajovna</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
