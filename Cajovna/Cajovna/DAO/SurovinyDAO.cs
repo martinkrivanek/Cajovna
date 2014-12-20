@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Cajovna.DAO
 {
-    interface SurovinyDAO
+    public interface SurovinyDAO
     {
         void create(Surovina surovina);
         Surovina read(int id);

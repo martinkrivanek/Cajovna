@@ -6,49 +6,30 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Cajovna;
 using Cajovna.Controllers;
+using Cajovna.Models;
+using Cajovna.DAO;
 
 namespace Cajovna.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
     {
+
         [TestMethod]
-        public void Index()
+        public void HomeController_Index()
         {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
+            var controller = new HomeController();
+            var result = (RedirectToRouteResult)controller.Index();
+            Assert.AreEqual("Admin", result.RouteValues["action"]);
         }
 
         [TestMethod]
-        public void About()
+        public void HomeController_Admin()
         {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+            //NO IDEA WHAT TO DO HERE...other testing must cover
         }
 
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
 
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        
     }
 }
