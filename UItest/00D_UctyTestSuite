@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="018_ucty-vytvoreni-stolu-pro-ucty.html">018_ucty-vytvoreni-stolu-pro-ucty</a></td></tr>
+<tr><td><a href="019_ucty-pridani-uctu-na-stol.html">019_ucty-pridani-uctu-na-stl</a></td></tr>
+<tr><td><a href="020_ucty-pridani-navoheo-zaznamu-na-stul.html">020_ucty-pridani-navoheo-zaznamu-na-stul</a></td></tr>
+<tr><td><a href="021_ucty-presunuti-uctu-na-jiny-stul.html">021_ucty-presunuti-uctu-na-jiny-stul</a></td></tr>
+<tr><td><a href="022_ucty-prejmenovani-uctu.html">022_ucty-prejmenovani-uctu</a></td></tr>
+<tr><td><a href="023_ucty-odepsani-polozky-na-uctu.html">023_ucty-odepsani-polozky-na-uctu</a></td></tr>
+<tr><td><a href="024_ucty-zaplaceni-polozky-na-uctu.html">024_ucty-zaplaceni-polozky-na-uctu</a></td></tr>
+<tr><td><a href="025_ucty-smazani-uctu.html">025_ucty-smazani-uctu</a></td></tr>
+<tr><td><a href="026_ucty-smazani-uctu-pruchozi.html">026_ucty-smazani-uctu-pruchozi</a></td></tr>
+</tbody></table>
+</body>
+</html>
